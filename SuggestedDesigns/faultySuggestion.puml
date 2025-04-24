@@ -1,0 +1,133 @@
+@startuml
+skinparam class {
+  BackgroundColor #F8F9FA
+  ArrowColor #2C3E50
+  BorderColor #2C3E50
+}
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' Interfaces
+interface Comparable {
+  +compareTo(other: Object): int
+}
+
+note top of Comparable: "Java standard interface\nfor sorting objects"
+
+interface Sellable {
+  +sellItem(): void
+  +getPrice(): double
+  +isAvailable(): boolean
+}
+
+' Abstract Class
+abstract class PharmacyItem {
+  #itemId: int
+  #name: String
+  #price: double
+  #isAvailable: boolean
+  
+  +displayInfo(): void
+  +{abstract} getCategory(): String
+  +compareTo(item: PharmacyItem): int
+}
+
+' Connect PharmacyItem to Comparable
+PharmacyItem ..|> Comparable
+
+' Concrete Classes - Pharmacy Items
+class Medicine extends PharmacyItem {
+  -dosage: String
+  -requiresPrescription: boolean
+  
+  +getCategory(): String
+  +displayInfo(): void
+  +sellItem(): void
+}
+
+class HealthProduct extends PharmacyItem {
+  -category: String
+  -isOrganic: boolean
+  
+  +getCategory(): String
+  +displayInfo(): void
+  +sellItem(): void
+}
+
+class ReferenceItem extends PharmacyItem {
+  -publisher: String
+  -publicationDate: Date
+  -forReferenceOnly: boolean
+  
+  +getCategory(): String
+  +displayInfo(): void
+  +isLoanable(): boolean
+}
+
+class Equipment extends PharmacyItem {
+  -type: String
+  -warrantyPeriod: int
+  
+  +getCategory(): String
+  +displayInfo(): void
+}
+
+' Main Manager Class
+class PharmacyManager {
+  -pharmacyItems: PharmacyItem[]
+  -customers: Customer[]
+  -orders: Order[]
+  
+  +addItem(item: PharmacyItem): void
+  +removeItem(item: PharmacyItem): void
+  +findItemById(itemId: int): PharmacyItem
+  +displayAllItems(): void
+  +sortItems(): void
+  +createOrder(customer: Customer): Order
+  +sellItem(item: Sellable): void
+}
+
+' Customer Class
+class Customer {
+  -customerId: int
+  -name: String
+  -contact: String
+  
+  +displayInfo(): void
+  +makeOrder(): Order
+}
+
+class Order {
+  -orderId: int
+  -customer: Customer
+  -items: PharmacyItem[]
+  -totalAmount: double
+  
+  +addItem(item: PharmacyItem): void
+  +removeItem(item: PharmacyItem): void
+  +calculateTotal(): double
+  +processPayment(): boolean
+}
+
+' Implement Sellable only for specific classes
+Medicine ..|> Sellable
+HealthProduct ..|> Sellable
+Equipment ..|> Sellable
+
+' Layout control for clearer diagram
+PharmacyItem -[hidden]down- Medicine
+PharmacyItem -[hidden]down- ReferenceItem
+Medicine -[hidden]right- HealthProduct
+HealthProduct -[hidden]right- Equipment
+Equipment -[hidden]right- ReferenceItem
+PharmacyManager -[hidden]down- Customer
+Customer -[hidden]down- Order
+
+' Relationships
+PharmacyManager "1" *-- "*" PharmacyItem : manages >
+PharmacyManager "1" *-- "*" Customer : serves >
+PharmacyManager "1" *-- "*" Order : processes >
+Order "*" -- "1" Customer : placed by >
+Order "1" o-- "*" PharmacyItem : contains >
+
+@enduml
