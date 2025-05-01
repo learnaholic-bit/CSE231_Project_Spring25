@@ -69,7 +69,7 @@ public class ReferenceItem extends PhamacyItem{
         //System.out.println("Category:\t" + CATEGORY);
         System.out.println("Subcategory:\t" + subcategory);
         System.out.println("Publisher:\t" + publisher);
-        System.out.println("Publication Date:\t" + publicationDate.toString());
+        System.out.println("Publication Date:\t" + (publicationDate == null ? null : publicationDate.toString()));
         System.out.println("For Reference Only:\t" + (forReferenceOnly ? "Yes" : "No"));
     }
     boolean isLoanable() {
