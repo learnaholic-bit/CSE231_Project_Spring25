@@ -69,6 +69,9 @@ public void addQuantity(int quantity) throws IllegalArgumentException
     else
     this.quantity += quantity;
 }
-
+        public boolean isSoldOut ()
+{
+    return (quantity==0);
+}
 }
 
