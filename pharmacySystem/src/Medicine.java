@@ -3,7 +3,7 @@ package pkgfinal.project;
 
 import java.time.LocalDate;
 
-public class Medicine extends PharmacyItem
+public class Medicine extends PharmacyItem implements sellable
 {    
 private String dosage;
 private boolean requiresPrescription;
@@ -69,9 +69,6 @@ public void addQuantity(int quantity) throws IllegalArgumentException
     else
     this.quantity += quantity;
 }
-public boolean isSoldOut ()
-{
-    return (quantity==0);
-}
+
 }
 
