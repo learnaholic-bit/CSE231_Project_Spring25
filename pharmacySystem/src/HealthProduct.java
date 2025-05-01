@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 
 
-public class HealthProduct extends PharmacyItem
+public class HealthProduct extends PharmacyItem implements sellable
 {
     private boolean isOrganic;
     private LocalDate expiryDate ;
@@ -65,10 +65,6 @@ public void addQuantity(int quantity) throws IllegalArgumentException
         throw new IllegalArgumentException("the quantity cann't be negative");
     else
     this.quantity += quantity;
-}
-    public boolean isSoldOut ()
-{
-    return (quantity==0);
 }
 }
 
