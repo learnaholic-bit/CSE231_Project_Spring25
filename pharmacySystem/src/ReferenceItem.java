@@ -3,7 +3,7 @@ import java.util.Date;
 public class ReferenceItem extends PhamacyItem{
     //Data Fields
     private static final String CATEGORY = "Reference Item";
-    private String subcategory;
+    private String subCategory;
     private String publisher;
     private Date publicationDate;
     private boolean forReferenceOnly;
@@ -13,16 +13,16 @@ public class ReferenceItem extends PhamacyItem{
     //Constructors
     public ReferenceItem() {
         super.category = CATEGORY;
-        this.subcategory = null;
+        this.subCategory = null;
         this.publisher = null;
         this.publicationDate = null;
         this.forReferenceOnly = false;
     }
     public ReferenceItem (int itemID, String name, double price, boolean isAvailable, String description,
-                          String subcategory, String publisher, Date publicationDate, boolean forReferenceOnly) {
+                          String subCategory, String publisher, Date publicationDate, boolean forReferenceOnly) {
 
         super(itemID, name, price, isAvailable, CATEGORY, description);
-        this.subcategory = subcategory;
+        this.subCategory = subCategory;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.forReferenceOnly = forReferenceOnly;
@@ -34,8 +34,8 @@ public class ReferenceItem extends PhamacyItem{
     public String getCategory() {
         return CATEGORY;
     }
-    public String getSubcategory() {
-        return subcategory;
+    public String getsubCategory() {
+        return subCategory;
     }
     public String getPublisher() {
         return publisher;
@@ -46,9 +46,9 @@ public class ReferenceItem extends PhamacyItem{
 
 
     //Setters
-    public void setSubcategory(String subcategory) throws IllegalArgumentException {
+    public void setsubCategory(String subCategory) throws IllegalArgumentException {
         if (publisher == null) throw new IllegalArgumentException("Please Enter a Valid String");
-        else this.subcategory = subcategory;
+        else this.subCategory = subCategory;
     }
     void setPublisher (String publisher) throws IllegalArgumentException {
         if (publisher == null) throw new IllegalArgumentException("Please Enter a Valid String");
@@ -67,7 +67,7 @@ public class ReferenceItem extends PhamacyItem{
     void displayInfo() {
         super.displayInfo();
         //System.out.println("Category:\t" + CATEGORY);
-        System.out.println("Subcategory:\t" + subcategory);
+        System.out.println("subCategory:\t" + subCategory);
         System.out.println("Publisher:\t" + publisher);
         System.out.println("Publication Date:\t" + (publicationDate == null ? null : publicationDate.toString()));
         System.out.println("For Reference Only:\t" + (forReferenceOnly ? "Yes" : "No"));
