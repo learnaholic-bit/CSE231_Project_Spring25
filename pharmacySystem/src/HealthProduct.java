@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 
 
-public class HealthProduct extends ParmacyItem
+public class HealthProduct extends PharmacyItem
 {
     private boolean isOrganic;
     private LocalDate expiryDate ;
