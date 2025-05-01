@@ -1,9 +1,6 @@
-
-package pkgfinal.project;
-
 import java.time.LocalDate;
 
-public class Medicine extends PharmacyItem implements sellable
+public class Medicine extends PharmacyItem implements Sellable
 {    
 private String dosage;
 private boolean requiresPrescription;

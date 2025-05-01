@@ -1,11 +1,6 @@
-package pkgfinal.project;
-
-
 import java.time.LocalDate;
 
-
-
-public class HealthProduct extends PharmacyItem implements sellable
+public class HealthProduct extends PharmacyItem implements Sellable
 {
     private boolean isOrganic;
     private LocalDate expiryDate ;
