@@ -51,7 +51,7 @@ public class ReferenceItem extends PhamacyItem{
     @Override
     void displayInfo() {
         super.displayInfo();
-        System.out.println("Category:\t" + CATEGORY);
+        //System.out.println("Category:\t" + CATEGORY);
         System.out.println("Publisher:\t" + publisher);
         System.out.println("Publication Date:\t" + publicationDate.toString());
         System.out.println("For Reference Only:\t" + (forReferenceOnly ? "Yes" : "No"));
