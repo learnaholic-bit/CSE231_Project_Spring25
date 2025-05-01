@@ -3,7 +3,7 @@ package pkgfinal.project;
 
 import java.time.LocalDate;
 
-public class Medicine extends ParmacyItem
+public class Medicine extends PharmacyItem
 {    
 private String dosage;
 private boolean requiresPrescription;
