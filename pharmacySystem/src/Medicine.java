@@ -6,6 +6,8 @@ private String dosage;
 private boolean requiresPrescription;
 private LocalDate expiryDate ;
 private String activeIngrediant;
+String category;
+private static final String CATEGORY = "Medicine";
 public Medicine()
 {
     
@@ -23,9 +25,8 @@ public Medicine(int itemId,String name,double price,String category,String descr
 
 public void displayInfo ()
 {
+    
     System.out.println("Active Ingediant:"+activeIngrediant+" Dosage:"+dosage);
-    System.out.println("Category:"+super.getCategory());
-    System.out.println("Quantity:"+quantity);
     System.out.print("Requires Prescription:");
     if(requiresPrescription)
         System.out.println("Yes");
