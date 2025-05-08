@@ -25,7 +25,7 @@ public Medicine(int itemId,String name,double price,String category,String descr
 
 public void displayInfo ()
 {
-    
+    super.displayInfo();
     System.out.println("Active Ingediant:"+activeIngrediant+" Dosage:"+dosage);
     System.out.print("Requires Prescription:");
     if(requiresPrescription)
