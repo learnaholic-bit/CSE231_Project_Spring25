@@ -5,14 +5,14 @@ public class HealthProduct extends PharmacyItem implements Sellable
     private boolean isOrganic;
     private LocalDate expiryDate ;
     private int quantity;   
-    
+    private static final String CATEGORY = "Health Product";
     public HealthProduct()
     {
     }
     
-    public HealthProduct(String category,boolean isOrganic,LocalDate expiryDate,int quantity)
+    public HealthProduct(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,boolean isOrganic,LocalDate expiryDate,int quantity)
     {
-        super(category);
+        super(itemId,name,price,category,description,isAvailable,quantity);
         this.isOrganic = isOrganic;
         this.expiryDate = expiryDate;
         this.quantity = quantity;
@@ -20,8 +20,7 @@ public class HealthProduct extends PharmacyItem implements Sellable
 
 public void displayInfo ()
 {
-    System.out.println("Category"+super.getCategory());
-    System.out.println("Quantity:"+quantity);
+    super.displayInfo();
     System.out.print("Organic:");
     if(isOrganic)
         System.out.println("Yes");
