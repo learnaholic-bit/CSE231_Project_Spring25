@@ -5,19 +5,17 @@ public class Medicine extends PharmacyItem implements Sellable
 private String dosage;
 private boolean requiresPrescription;
 private LocalDate expiryDate ;
-private int quantity;
 private String activeIngrediant;
 public Medicine()
 {
     
 }
-public Medicine(String category,String activeIngrediant,String dosage,boolean requiresPrescription,LocalDate expiryDate,int quantity )
+public Medicine(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,String activeIngrediant,String dosage,boolean requiresPrescription,LocalDate expiryDate )
 {
-    super(category);
+    super(itemId,name,price,category,description,isAvailavble,quantity);
     this.dosage =dosage;
     this.requiresPrescription=requiresPrescription;
-    this.expiryDate=expiryDate;
-    this.quantity =quantity; 
+    this.expiryDate=expiryDate; 
     this.activeIngrediant=activeIngrediant;
 }
 
