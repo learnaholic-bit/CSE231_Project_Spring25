@@ -15,7 +15,13 @@ public class Equipment extends PharmacyItem implements Sellable{
         this.type = type;
         this.warrantyPeriod = warrantyPeriod;
     }
-
+    public String getSubCategory() {
+        return subCategory;
+    }
+    public void setSubCategory(String subCategory) throws IllegalArgumentException {
+        if (subCategory == null) throw new IllegalArgumentException("Please Enter a Valid String");
+        else this.subCategory = subCategory;
+    }
     public void setType(String type){
         this.type = type;
     }

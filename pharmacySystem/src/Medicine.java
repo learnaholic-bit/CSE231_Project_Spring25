@@ -41,9 +41,8 @@ public void displayInfo ()
     public boolean isAvailable(){
         return super.isAvailable;
     }
-    @Override
-    public String getCategory(){return CATEGORY;}
     public LocalDate getExpiryDate(){return expiryDate;}
+    @Override
     public String getSubCategory(){return subCategory;}
     public String getDosage(){return dosage;}
     public boolean getRequiresPrescription(){return requiresPrescription;}
@@ -75,6 +74,9 @@ public void addQuantity(int quantity) throws IllegalArgumentException
     else
         this.quantity += quantity;
 }
-
+    public void setSubCategory(String subCategory) throws IllegalArgumentException {
+        if (subCategory == null) throw new IllegalArgumentException("Please Enter a Valid String");
+        else this.subCategory = subCategory;
+    }
 }
 

@@ -31,18 +31,12 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
         this.quantity = quantity;
     }
 
-    public PharmacyItem(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity){
-        this.itemId = itemId;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.description = description;
-        this.isAvailable = isAvailable;
-        this.quantity = quantity;
+    public String getCategory() {
+        return this.category;
     }
 
+    public abstract String getSubCategory();
 
-    public abstract String getCategory();
 
     public void setItemId(int itemId){
         if(itemId <= 0)
@@ -77,6 +71,7 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
     public void setCategory(String category){
         this.category = category;
     }
+    public abstract void setSubCategory(String SubCategory);
 
     public void setDescription(String description){
         this.description = description;

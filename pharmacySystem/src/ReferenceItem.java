@@ -29,10 +29,7 @@ public class ReferenceItem extends PharmacyItem{
     //Methods
         //Getters
     @Override
-    public String getCategory() {
-        return CATEGORY;
-    }
-    public String getsubCategory() {
+    public String getSubCategory() {
         return subCategory;
     }
     public String getPublisher() {
@@ -44,8 +41,9 @@ public class ReferenceItem extends PharmacyItem{
 
 
     //Setters
-    public void setsubCategory(String subCategory) throws IllegalArgumentException {
-        if (publisher == null) throw new IllegalArgumentException("Please Enter a Valid String");
+
+    public void setSubCategory(String subCategory) throws IllegalArgumentException {
+        if (subCategory == null) throw new IllegalArgumentException("Please Enter a Valid String");
         else this.subCategory = subCategory;
     }
     public void setPublisher (String publisher) throws IllegalArgumentException {
