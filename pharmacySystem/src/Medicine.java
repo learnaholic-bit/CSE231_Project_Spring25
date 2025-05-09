@@ -78,5 +78,12 @@ public void addQuantity(int quantity) throws IllegalArgumentException
         if (subCategory == null) throw new IllegalArgumentException("Please Enter a Valid String");
         else this.subCategory = subCategory;
     }
+    public void editPrice(int newPrice) throws IllegalArgumentException
+    {
+        if(newPrice<0)
+            throw new IllegalArgumentException("Please Enter a Valid Number");
+        else
+          this.price = newPrice;
+    }
 }
 
