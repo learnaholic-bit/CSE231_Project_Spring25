@@ -4,18 +4,18 @@ public class HealthProduct extends PharmacyItem implements Sellable
 {
     private boolean isOrganic;
     private LocalDate expiryDate ;
-    private int quantity;   
     private static final String CATEGORY = "Health Product";
+    private String subCategory;
     public HealthProduct()
     {
     }
     
-    public HealthProduct(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,boolean isOrganic,LocalDate expiryDate,int quantity)
+    public HealthProduct(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,boolean isOrganic,LocalDate expiryDate,String subCategory)
     {
         super(itemId,name,price,category,description,isAvailable,quantity);
         this.isOrganic = isOrganic;
         this.expiryDate = expiryDate;
-        this.quantity = quantity;
+        this.subCategory = subCategory;
     }
 
 public void displayInfo ()
@@ -33,12 +33,22 @@ public void displayInfo ()
     else
         System.out.println("not expired");
 }
+    @Override
+    public boolean isAvailable(){
+        return super.isAvailable;
+    }
+    @Override
+    public String getCategory(){
+        return CATEGORY;
+    }
+    public LocalDate getExpiryDate(){return expiryDate;}
+    public String getSubCategory(){return subCategory;}
 
 public void sellItem () throws IllegalStateException 
 {
-    if(isExpired()==true)
+    if(isExpired())
         throw new IllegalStateException("the Health product is expired");
-    else if(isSoldOut()==true)
+    else if(isSoldOut())
         throw new IllegalStateException("the Health product is sold out");
     else 
     quantity -=1;
@@ -56,9 +66,9 @@ public boolean isExpired()
 public void addQuantity(int quantity) throws IllegalArgumentException
 {
     if(quantity<0)
-        throw new IllegalArgumentException("the quantity cann't be negative");
+        throw new IllegalArgumentException("the quantity can't be negative");
     else
-    this.quantity += quantity;
+         this.quantity += quantity;
 }
         public boolean isSoldOut ()
 {

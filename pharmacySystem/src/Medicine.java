@@ -6,19 +6,20 @@ private String dosage;
 private boolean requiresPrescription;
 private LocalDate expiryDate ;
 private String activeIngredient;
-String category;
+private String subCategory;
 private static final String CATEGORY = "Medicine";
 public Medicine()
 {
 
 }
-public Medicine(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,String activeIngrediant,String dosage,boolean requiresPrescription,LocalDate expiryDate )
+public Medicine(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,String activeIngredient,String dosage,boolean requiresPrescription,LocalDate expiryDate,String subCategory )
 {
     super(itemId,name,price,category,description,isAvailable,quantity);
     this.dosage =dosage;
     this.requiresPrescription=requiresPrescription;
     this.expiryDate=expiryDate; 
-    this.activeIngredient=activeIngrediant;
+    this.activeIngredient=activeIngredient;
+    this.subCategory=subCategory;
 }
 
 
@@ -47,6 +48,8 @@ public void displayInfo ()
     public String getCategory(){
         return CATEGORY;
     }
+    public LocalDate getExpiryDate(){return expiryDate;}
+    public String getSubCategory(){return subCategory;}
 
 public void sellItem () throws IllegalStateException 
 {
