@@ -8,6 +8,7 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
     protected boolean isAvailable;
     protected int quantity;
 
+
     public PharmacyItem(){
         this.itemId = 0;
         this.name = "";
