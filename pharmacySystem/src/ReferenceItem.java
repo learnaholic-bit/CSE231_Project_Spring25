@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class ReferenceItem extends PhamacyItem{
+public class ReferenceItem extends PharmacyItem{
     //Data Fields
     private static final String CATEGORY = "Reference Item";
     private String subCategory;
@@ -18,10 +18,10 @@ public class ReferenceItem extends PhamacyItem{
         this.publicationDate = null;
         this.forReferenceOnly = false;
     }
-    public ReferenceItem (int itemID, String name, double price, boolean isAvailable, String description,
+    public ReferenceItem (int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,
                           String subCategory, String publisher, Date publicationDate, boolean forReferenceOnly) {
 
-        super(itemID, name, price, isAvailable, CATEGORY, description);
+        super(itemId, name, price, CATEGORY, description, isAvailable, quantity); //(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity)
         this.subCategory = subCategory;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
@@ -50,21 +50,21 @@ public class ReferenceItem extends PhamacyItem{
         if (publisher == null) throw new IllegalArgumentException("Please Enter a Valid String");
         else this.subCategory = subCategory;
     }
-    void setPublisher (String publisher) throws IllegalArgumentException {
+    public void setPublisher (String publisher) throws IllegalArgumentException {
         if (publisher == null) throw new IllegalArgumentException("Please Enter a Valid String");
         else this.publisher = publisher;
     }
-    void setPublicationDate (Date date) throws IllegalArgumentException {   //I'm not sure of this exception type
+    public void setPublicationDate (Date date) throws IllegalArgumentException {   //I'm not sure of this exception type
         if (date == null) throw new IllegalArgumentException("Please Enter a Valid Date");
         else this.publicationDate = date;
     }
-    void setForReferenceOnly (boolean forReferenceOnly) {
+    public void setForReferenceOnly (boolean forReferenceOnly) {
         this.forReferenceOnly = forReferenceOnly;
     }
 
     //Other methods
     @Override
-    void displayInfo() {
+    public void displayInfo() {
         super.displayInfo();
         //System.out.println("Category:\t" + CATEGORY);
         System.out.println("subCategory:\t" + subCategory);
