@@ -38,11 +38,12 @@ public void displayInfo ()
         return super.isAvailable;
     }
     @Override
-    public String getCategory(){
-        return CATEGORY;
-    }
+    public String getCategory(){return CATEGORY;}
     public LocalDate getExpiryDate(){return expiryDate;}
     public String getSubCategory(){return subCategory;}
+    public boolean getIsOrganic(){return isOrganic;}
+
+
 
 public void sellItem () throws IllegalStateException 
 {

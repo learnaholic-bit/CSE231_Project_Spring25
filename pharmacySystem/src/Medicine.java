@@ -45,11 +45,12 @@ public void displayInfo ()
         return super.isAvailable;
     }
     @Override
-    public String getCategory(){
-        return CATEGORY;
-    }
+    public String getCategory(){return CATEGORY;}
     public LocalDate getExpiryDate(){return expiryDate;}
     public String getSubCategory(){return subCategory;}
+    public String getDosage(){return dosage;}
+    public boolean getRequiresPrescription(){return requiresPrescription;}
+    public String getActiveIngredient(){return activeIngredient;}
 
 public void sellItem () throws IllegalStateException 
 {
