@@ -67,7 +67,7 @@ public class ReferenceItem extends PharmacyItem{
         System.out.println("Publication Date:\t" + (publicationDate == null ? null : publicationDate.toString()));
         System.out.println("For Reference Only:\t" + (forReferenceOnly ? "Yes" : "No"));
     }
-    boolean isLoanable() {
+    public boolean isLoanable() {
         return !forReferenceOnly;
     }
 }
