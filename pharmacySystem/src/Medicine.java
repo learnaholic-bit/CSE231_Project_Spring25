@@ -14,7 +14,7 @@ public Medicine()
 }
 public Medicine(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,String activeIngrediant,String dosage,boolean requiresPrescription,LocalDate expiryDate )
 {
-    super(itemId,name,price,category,description,isAvailavble,quantity);
+    super(itemId,name,price,category,description,isAvailable,quantity);
     this.dosage =dosage;
     this.requiresPrescription=requiresPrescription;
     this.expiryDate=expiryDate; 
@@ -39,11 +39,20 @@ public void displayInfo ()
         System.out.println("this medicien is not expired");
 }
 
+    @Override
+    public boolean isAvailable(){
+        return super.isAvailable;
+    }
+    @Override
+    public String getCategory(){
+        return CATEGORY;
+    }
+
 public void sellItem () throws IllegalStateException 
 {
     if(isExpired()==true)
         throw new IllegalStateException("the medicine is expired");
-    else if(isSoldOut()==true)
+    else if(isAvailable()==true)
         throw new IllegalStateException("the medicine is sold out");
     else 
     quantity -=1;
@@ -63,11 +72,8 @@ public void addQuantity(int quantity) throws IllegalArgumentException
     if(quantity<0)
         throw new IllegalArgumentException("the quantity cann't be negative");
     else
-    this.quantity += quantity;
+        this.quantity += quantity;
 }
-        public boolean isSoldOut ()
-{
-    return (quantity==0);
-}
+
 }
 
