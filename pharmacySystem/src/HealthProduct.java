@@ -5,17 +5,16 @@ public class HealthProduct extends PharmacyItem implements Sellable
     private boolean isOrganic;
     private LocalDate expiryDate ;
     private static final String CATEGORY = "Health Product";
-    private String subCategory;
     public HealthProduct()
     {
     }
-    
-    public HealthProduct(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,boolean isOrganic,LocalDate expiryDate,String subCategory)
+
+    public HealthProduct(int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity,
+                         boolean isOrganic,LocalDate expiryDate)
     {
-        super(itemId,name,price,category,description,isAvailable,quantity);
+        super(itemId, name, price, CATEGORY, subCategory, description, isAvailable, quantity); //int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity
         this.isOrganic = isOrganic;
         this.expiryDate = expiryDate;
-        this.subCategory = subCategory;
     }
 
 public void displayInfo ()

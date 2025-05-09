@@ -1,28 +1,25 @@
 import java.time.LocalDate;
 
 public class Medicine extends PharmacyItem implements Sellable
-{    
-private String dosage;
-private boolean requiresPrescription;
-private LocalDate expiryDate ;
-private String activeIngredient;
-private String subCategory;
-private static final String CATEGORY = "Medicine";
-public Medicine()
 {
+    private String dosage;
+    private boolean requiresPrescription;
+    private LocalDate expiryDate ;
+    private String activeIngredient;
+    private static final String CATEGORY = "Medicine";
+    public Medicine()
+    {
 
-}
-public Medicine(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,String activeIngredient,String dosage,boolean requiresPrescription,LocalDate expiryDate,String subCategory )
-{
-    super(itemId,name,price,category,description,isAvailable,quantity);
-    this.dosage =dosage;
-    this.requiresPrescription=requiresPrescription;
-    this.expiryDate=expiryDate; 
-    this.activeIngredient=activeIngredient;
-    this.subCategory=subCategory;
-}
-
-
+    }
+    public Medicine(int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity,
+                    String activeIngredient,String dosage,boolean requiresPrescription,LocalDate expiryDate)
+    {
+        super(itemId, name, price, CATEGORY, subCategory, description, isAvailable, quantity); //int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity
+        this.dosage =dosage;
+        this.requiresPrescription=requiresPrescription;
+        this.expiryDate=expiryDate;
+        this.activeIngredient=activeIngredient;
+    }
 
 public void displayInfo ()
 {

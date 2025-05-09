@@ -3,7 +3,6 @@ import java.util.Date;
 public class ReferenceItem extends PharmacyItem{
     //Data Fields
     private static final String CATEGORY = "Reference Item";
-    private String subCategory;
     private String publisher;
     private Date publicationDate;
     private boolean forReferenceOnly;
@@ -18,11 +17,10 @@ public class ReferenceItem extends PharmacyItem{
         this.publicationDate = null;
         this.forReferenceOnly = false;
     }
-    public ReferenceItem (int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity,
-                          String subCategory, String publisher, Date publicationDate, boolean forReferenceOnly) {
+    public ReferenceItem (int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity,
+                          String publisher, Date publicationDate, boolean forReferenceOnly) {
 
-        super(itemId, name, price, CATEGORY, description, isAvailable, quantity); //(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity)
-        this.subCategory = subCategory;
+        super(itemId, name, price, CATEGORY, subCategory, description, isAvailable, quantity); //int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.forReferenceOnly = forReferenceOnly;
@@ -67,7 +65,6 @@ public class ReferenceItem extends PharmacyItem{
     public void displayInfo() {
         super.displayInfo();
         //System.out.println("Category:\t" + CATEGORY);
-        System.out.println("subCategory:\t" + subCategory);
         System.out.println("Publisher:\t" + publisher);
         System.out.println("Publication Date:\t" + (publicationDate == null ? null : publicationDate.toString()));
         System.out.println("For Reference Only:\t" + (forReferenceOnly ? "Yes" : "No"));

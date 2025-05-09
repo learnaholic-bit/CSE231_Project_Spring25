@@ -1,6 +1,5 @@
 public class Equipment extends PharmacyItem implements Sellable{
     private static final String CATEGORY = "Equipment";
-    private String subCategory;
     private String type;
     private int warrantyPeriod;
 
@@ -10,10 +9,9 @@ public class Equipment extends PharmacyItem implements Sellable{
         this.warrantyPeriod = 0;
     }
 
-    public Equipment(int itemId,String name,double price,String category,String description
-            ,boolean isAvailable,String subCategory,String type, int warrantyPeriod,int quantity){
-        super(itemId,name,price,CATEGORY,description,isAvailable,quantity);
-        this.subCategory = subCategory;
+    public Equipment(int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity
+            ,String type, int warrantyPeriod){
+        super(itemId, name, price, CATEGORY, subCategory, description, isAvailable, quantity); //int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity
         this.type = type;
         this.warrantyPeriod = warrantyPeriod;
     }

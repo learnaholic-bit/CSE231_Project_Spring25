@@ -3,6 +3,7 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
     protected String name;
     protected double price;
     protected String category;
+    protected String subCategory;
     protected String description;
     protected boolean isAvailable;
     protected int quantity;
@@ -12,9 +13,21 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
         this.name = "";
         this.price = 0;
         this.category = "";
+        this.subCategory = "";
         this.description = "";
         this.isAvailable = false;
         this.quantity = 0;
+    }
+
+    public PharmacyItem(int itemId,String name,double price,String category, String subCategory, String description,boolean isAvailable,int quantity){
+        this.itemId = itemId;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.description = description;
+        this.isAvailable = isAvailable;
+        this.quantity = quantity;
     }
 
     public PharmacyItem(int itemId,String name,double price,String category,String description,boolean isAvailable,int quantity){
