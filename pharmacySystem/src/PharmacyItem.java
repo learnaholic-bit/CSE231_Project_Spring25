@@ -43,7 +43,6 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
 
     public abstract String getCategory();
 
-
     public void setItemId(int itemId){
         if(itemId <= 0)
             throw new IllegalArgumentException("The id of any item can't be negative");
