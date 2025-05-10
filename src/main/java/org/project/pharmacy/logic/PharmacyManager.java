@@ -1,17 +1,19 @@
 package org.project.pharmacy.logic;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 //todo: recheck the access modifiers of the methods
 
 public class PharmacyManager extends Person {
     private ArrayList<PharmacyItem> pharmacyItems;
-    private ArrayList<Customer> customers; // Changed to ArrayList
+    private ArrayList<Person> customers; // Changed to ArrayList
     private ArrayList<Order> orders;       // Changed to ArrayList
     private String employeeId;
     private double salary;
+    private Map<String, String> passwordMap = new HashMap<>();
 
     /**
      * Constructor to initialize PharmacyManager with specific details.
@@ -37,13 +39,40 @@ public class PharmacyManager extends Person {
      * Default constructor to initialize PharmacyManager with default values.
      */
     public PharmacyManager() {
-        super();
+        super("admin", 0, "000-000-0000", "Unknown");
         this.employeeId = "";
         this.salary = 0.0;
         this.pharmacyItems = new ArrayList<>();
         this.customers = new ArrayList<>();
         this.orders = new ArrayList<>();
+        // Initialize the password map with a default entry for the manager
+        loadDefaultCredentials();
     }
+
+    /**
+     * Loads default credentials from the configuration file.
+     */
+    private void loadDefaultCredentials() {
+        Properties props = new Properties();
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                System.err.println("Unable to find config.properties");
+                return;
+            }
+
+            props.load(input);
+            String defaultUsername = props.getProperty("default.username");
+            String defaultPassword = props.getProperty("default.password");
+
+            if (defaultUsername != null && defaultPassword != null) {
+                this.passwordMap.put(defaultUsername.toLowerCase(), BCrypt.hashpw(defaultPassword, BCrypt.gensalt()));
+                System.out.println("Default credentials loaded successfully.");
+            }
+        } catch (IOException ex) {
+            System.err.println("Error loading config.properties file: " + ex.getMessage());
+        }
+    }
+
 
     /**
      * Adds a new item to the pharmacy inventory.
@@ -274,7 +303,7 @@ public class PharmacyManager extends Person {
             return;
         }
 
-        for (Customer customer : customers) {
+        for (Person customer : customers) {
             System.out.println(customer);
         }
     }
@@ -336,7 +365,7 @@ public class PharmacyManager extends Person {
      *
      * @return The list of customers.
      */
-    public ArrayList<Customer> getCustomers() {
+    public ArrayList<Person> getCustomers() {
         return customers;
     }
 
@@ -353,4 +382,58 @@ public class PharmacyManager extends Person {
     public String toString() {
         return super.toString() + ", Employee ID: " + employeeId + ", Salary: $" + salary;
     }
+
+    /**
+     * Sets the password for the manager.
+     *
+     * @param password The new password.
+     */
+    public void setPassword(String password) {
+        this.registerCustomer(this, password);
+    }
+
+    /**
+     * Registers a new customer with a hashed password.
+     *
+     * @param person The customer to be registered.
+     * @param password The password for the customer.
+     */
+    public void registerCustomer(Person person, String password) throws IllegalArgumentException {
+        if (person == null || password == null || person.getName().isEmpty()) {
+            throw new IllegalArgumentException("Customer and password must not be null, and customer name must not be empty.");
+        }
+        if (passwordMap.containsKey(person.getName())) {
+            throw new IllegalArgumentException("Customer already exists in the password map.");
+        }
+        if (!validatePassword(password)) {
+            throw new IllegalArgumentException("Password must be at least 8 characters long.");
+        }
+        // Hash the password using BCrypt
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        customers.add(person);
+        passwordMap.put(person.getName().toLowerCase(), hashedPassword);
+    }
+
+    /**
+     * Authenticates a customer using their username and password.
+     *
+     * @param username The username of the customer.
+     * @param password The password of the customer.
+     * @return True if authentication is successful, false otherwise.
+     */
+    public boolean authenticateCustomer(String username, String password) {
+        username = username.toLowerCase();
+        if (passwordMap.containsKey(username)) {
+            String hashedPassword = passwordMap.get(username);
+            return BCrypt.checkpw(password, hashedPassword);
+        }
+        return false;
+    }
+
+
+    private boolean validatePassword(String password) {
+        // Check if the password meets the criteria (e.g., length, complexity)
+        return password.length() >= 8; // Example: minimum length of 8 characters
+    }
+
 }

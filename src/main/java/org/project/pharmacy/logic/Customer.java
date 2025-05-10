@@ -1,29 +1,23 @@
 package org.project.pharmacy.logic;
-public class Customer {
+public class Customer extends Person {
     private int customerID;
-    private String name;
-    private String contact;
+
     //constructor
     public Customer (){
+        super();
         this.customerID=0;
-        this.name=null;
-        this.contact=null;
     }
     public Customer (int customerID,String name,String contact){
+        super();
         this.customerID=customerID;
-        this.name=name;
-        this.contact=contact;
+        super.setName(name);
+        super.setContactNumber(contact);
     }
     //GET
     public int getCustomerID (){
         return this.customerID;
     }
-    public String getName (){
-        return this.name;
-    }
-    public String getContact(){
-        return this.contact;
-    }
+
     //SET
     public void setCustomerID(int customerID)throws IllegalArgumentException{
         if (customerID<0)
@@ -31,17 +25,11 @@ public class Customer {
         else
             this.customerID=customerID;
     }
-    public void setName (String name){
-        this.name=name;
-    }
-    public void setContact(String contact){
-        this.contact=contact;
-    }
     //methods
     public void displayInfo (){
         System.out.println("Customer ID : "+customerID);
-        System.out.println("Name : "+name);
-        System.out.println("Contact : "+contact);
+        System.out.println("Name : "+super.getName());
+        System.out.println("Contact : "+super.getContactNumber());
     }
     public Order makeOrder (){
         Order Makeorder = new Order(this);

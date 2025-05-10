@@ -35,6 +35,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("My JavaFX GUI");
         primaryStage.setScene(mainScene);
         primaryStage.show();
+        this.switchToLoginScene();
     }
 
     public static void main(String[] args) {
@@ -59,7 +60,6 @@ public class MainApp extends Application {
     public void switchToLoginScene() {
         switchToScene(loginSceneCreator.getScene());
     }
-
     public void switchToDashBoardScene() {
         switchToScene(dashBoardSceneCreator.getScene());
     }

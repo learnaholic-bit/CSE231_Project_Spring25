@@ -9,6 +9,7 @@ module org.project.pharmacy {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires jbcrypt;
 
     opens org.project.pharmacy to javafx.fxml;
     exports org.project.pharmacy;
