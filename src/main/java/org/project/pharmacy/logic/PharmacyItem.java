@@ -82,7 +82,7 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
         return description;
     }
 
-    public void setQuantity(int quantity){
+    public void setQuantity(int quantity)throws IllegalArgumentException{
         if(quantity < 0)
             throw new IllegalArgumentException("Negative quantities is not valid");
         else
