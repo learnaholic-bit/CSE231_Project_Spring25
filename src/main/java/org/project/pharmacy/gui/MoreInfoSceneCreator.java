@@ -7,14 +7,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import org.project.pharmacy.logic.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class MoreInfoSceneCreator implements SceneProvider {
 
     private MainApp mainApp;
     private Scene scene;
-    PharmacyItem pharmacyItem;
-
+    String addedQuantityString ="0";
+    int addedQuantity =0;
+    Label quantityLable = new Label();
+    TextField quantityField = new TextField();
     public MoreInfoSceneCreator(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -28,8 +31,9 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
             Label label = new Label(" More Info Scene");
             GridPane root = new GridPane();
-            root.setHgap(15);
-            root.setVgap(15);
+            root.setHgap(10);
+            root.setVgap(10);
+            int column = 1;
             scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
 
             boolean isMedicine=false,isReferenceItem=false,isEquipment=false,isHealthProduct=false;
@@ -56,14 +60,14 @@ public class MoreInfoSceneCreator implements SceneProvider {
             String warrantyPeriod="",type ="";
 
             //setting general data strings
-            itemId ="Item Id:"+pharmacyItem.getItemId();
-            name = "Name:"+pharmacyItem.getName();
-            price ="Price:"+pharmacyItem.getPrice();
-            CATEGORY ="category:"+pharmacyItem.getCategory();
-            subCategory ="SubCategory:"+pharmacyItem.getSubCategory();
-            description ="Description:"+pharmacyItem.getDescription();
-            isAvailable="Available:"+pharmacyItem.getAvailable();
-            quantity ="Quantity:"+pharmacyItem.getQuantity();
+            itemId ="Item Id:\t"+pharmacyItem.getItemId();
+            name = "Name:\t"+pharmacyItem.getName();
+            price ="Price:\t"+pharmacyItem.getPrice();
+            CATEGORY ="category:\t"+pharmacyItem.getCategory();
+            subCategory ="SubCategory:\t"+pharmacyItem.getSubCategory();
+            description ="Description:\t"+pharmacyItem.getDescription();
+            isAvailable="Available:\t"+pharmacyItem.getAvailable();
+            quantity ="Quantity:\t"+pharmacyItem.getQuantity();
 
             //setting general data labels
             Label itemIdLable = new Label(itemId);
@@ -73,7 +77,8 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Label subCategoryLable = new Label(subCategory);
             Label descriptionLable = new Label(description);
             Label isAvailableLable = new Label(isAvailable);
-            Label quantityLable = new Label(quantity);
+            quantityLable.setText(quantity);
+            quantityField.setText("0");
 
             //setting medicine labels
             Label activeIngrediantLable = new Label(activeIngredient);
@@ -94,63 +99,102 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
             //setting adding quantity feature
             Button addQuantity = new Button("Add Quantity");
-            TextField quantityField = new TextField();
-            String addedQuantity = quantityField.getText();
-            addQuantity.setOnAction(e -> {pharmacyItem.setQuantity(pharmacyItem.getQuantity()+Integer.parseInt(addedQuantity));});
+
+
+            addQuantity.setOnAction(e -> {addingQuantity(pharmacyItem);});
 
             //general data
-            root.add(itemIdLable, 5, 2);
-            root.add(nameLable, 5, 3);
-            root.add(priceLable, 5, 4);
-            root.add(CATEGORYLable, 5, 5);
-            root.add(subCategoryLable, 5, 6);
-            root.add(descriptionLable, 5, 7);
-            root.add(isAvailableLable, 5, 8);
-            root.add(quantityLable, 5, 9);
-            root.add(addQuantity, 7, 3);
-            root.add(quantityField, 9, 3);
+            root.add(itemIdLable, column, 2);
+            root.add(nameLable, column, 3);
+            root.add(priceLable, column, 4);
+            root.add(CATEGORYLable, column, 5);
+            root.add(subCategoryLable, column, 6);
+            root.add(descriptionLable, column, 7);
+            root.add(isAvailableLable, column, 8);
+            root.add(quantityLable, column, 9);
+            root.add(addQuantity, column, 0);
+            root.add(quantityField, column+1, 0);
 
             //setting rest of data according to its type
             if(isMedicine)
             {
                 //medicine
-                expiryDate = "Expiry Date:"+((Medicine) pharmacyItem).getExpiryDate();
-                activeIngredient= "ActiveIngredient:"+((Medicine) pharmacyItem).getActiveIngredient();
-                dosage ="Dosage:"+((Medicine) pharmacyItem).getDosage();
-                requiresPrescription ="Requires Prescription:"+((Medicine) pharmacyItem).getRequiresPrescription();
-                root.add(expiryDateLable, 5, 10);
-                root.add(activeIngrediantLable, 5, 11);
-                root.add(DosageLable, 5, 12);
-                root.add(requiresPrescriptionLable, 5, 13);
+                expiryDate = "Expiry Date:\t"+((Medicine) pharmacyItem).getExpiryDate();
+                activeIngredient= "ActiveIngredient:\t"+((Medicine) pharmacyItem).getActiveIngredient();
+                dosage ="Dosage:\t"+((Medicine) pharmacyItem).getDosage();
+                requiresPrescription ="Requires Prescription:\t"+((Medicine) pharmacyItem).getRequiresPrescription();
+
+                expiryDateLable.setText("Expiry Date:\t"+((Medicine) pharmacyItem).getExpiryDate());
+                activeIngrediantLable.setText("ActiveIngredient:\t"+((Medicine) pharmacyItem).getActiveIngredient());
+                DosageLable.setText("Dosage:\t"+((Medicine) pharmacyItem).getDosage());
+                if(((Medicine)pharmacyItem).getRequiresPrescription())
+                requiresPrescriptionLable.setText("Requires Prescription:\tyes");
+                else
+                requiresPrescriptionLable.setText("Requires Prescription:\tno");
+
+                root.add(expiryDateLable, column, 10);
+                root.add(activeIngrediantLable, column, 11);
+                root.add(DosageLable, column, 12);
+                root.add(requiresPrescriptionLable, column, 13);
+
             }
             if(isHealthProduct)
             {
                 //health product
-                expiryDate = "Expiry Date:"+((HealthProduct) pharmacyItem).getExpiryDate();
-                isOrganic = "is Organic:"+((HealthProduct) pharmacyItem).getIsOrganic();
+                expiryDate = "Expiry Date:\t"+((HealthProduct) pharmacyItem).getExpiryDate();
+                isOrganic = "is Organic:\t"+((HealthProduct) pharmacyItem).getIsOrganic();
 
-                root.add(isOraganicLable, 5, 10);
-                root.add(expiryDateLable, 5, 11);
+                expiryDateLable.setText("Expiry Date:\t"+expiryDate);
+                if(((HealthProduct)pharmacyItem).getIsOrganic())
+                isOraganicLable.setText("isOrganic:\tyes");
+                else
+                    isOraganicLable.setText("isOrganic:\tno");
+
+                root.add(isOraganicLable, column, 10);
+                root.add(expiryDateLable, column, 11);
             }
             if(isReferenceItem)
             {
                 //reference item
-                publisher = "Publisher:"+((ReferenceItem) pharmacyItem).getPublisher();
-                publicationDate = "Publication Date:"+((ReferenceItem) pharmacyItem).getPublicationDate();
+                publisher = "Publisher:\t"+((ReferenceItem) pharmacyItem).getPublisher();
+                publicationDate = "Publication Date:\t"+((ReferenceItem) pharmacyItem).getPublicationDate();
 
-                root.add(publisherLable, 5, 10);
-                root.add(publicationDateLable, 5, 11);
+                publicationDateLable.setText("Publication Date:\t"+((ReferenceItem) pharmacyItem).getPublicationDate());
+                publisherLable.setText("Publisher:\t"+((ReferenceItem) pharmacyItem).getPublisher());
+
+                root.add(publisherLable, column, 10);
+                root.add(publicationDateLable, column, 11);
             }
             if(isEquipment)
             {
                 //equipment
-                type = "type:"+((Equipment) pharmacyItem).getType();
-                warrantyPeriod = "Warranty Period:"+((Equipment) pharmacyItem).getWarrantyPeriod();
+                type = "type:\t"+((Equipment) pharmacyItem).getType();
+                warrantyPeriod = "Warranty Period:\t"+((Equipment) pharmacyItem).getWarrantyPeriod();
 
-                root.add(typeLable, 5, 10);
-                root.add(warrantyPeriodLable, 5, 11);
+                warrantyPeriodLable.setText("Warranty Period:\t"+warrantyPeriod);
+                typeLable.setText("Type:\t"+((Equipment) pharmacyItem).getType());
+
+                root.add(typeLable, column, 10);
+                root.add(warrantyPeriodLable, column, 11);
             }
         }
         return scene;
+    }
+    void addingQuantity(PharmacyItem pharmacyItem) {
+        addedQuantityString = quantityField.getText();
+        try{
+            addedQuantity = Integer.parseInt(addedQuantityString);
+            pharmacyItem.setQuantity(pharmacyItem.getQuantity() + addedQuantity);
+            quantityLable.setText("Quantity:\t" + pharmacyItem.getQuantity());
+
+        }
+        catch(NumberFormatException e)
+        {}
+        catch(IllegalArgumentException e)
+        {}
+        finally {
+            quantityField.setText("0");
+        }
+
     }
 }
