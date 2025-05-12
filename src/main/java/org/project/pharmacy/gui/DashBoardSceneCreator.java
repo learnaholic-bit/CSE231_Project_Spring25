@@ -3,6 +3,12 @@ package org.project.pharmacy.gui;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 //if you are going to create orders here
 //todo: Create Order , update (Latest) Order,
@@ -14,15 +20,261 @@ public class DashBoardSceneCreator implements SceneProvider {
     public DashBoardSceneCreator(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
+    private TextField[] quantityFields; // To store TextFields for order processing
     @Override
     public Scene getScene() {
         if (scene == null) {
-            Label label = new Label("Dashboard");
-            VBox root = new VBox(label);
+          //  Label label = new Label("Dashboard");
+            // VBox root = new VBox(label);
+            // Create GridPane for the table
+            GridPane gridPane = new GridPane();
+            gridPane.setAlignment(Pos.CENTER);
+            gridPane.setHgap(0);
+            gridPane.setVgap(0);
+            gridPane.setPadding(new Insets(10));
+            gridPane.setGridLinesVisible(false);
+
+            // Set column constraints for resizing
+            ColumnConstraints col1 = new ColumnConstraints();
+            col1.setPercentWidth(20);
+            ColumnConstraints col2 = new ColumnConstraints();
+            col2.setPercentWidth(15);
+            ColumnConstraints col3 = new ColumnConstraints();
+            col3.setPercentWidth(15);
+            ColumnConstraints col4 = new ColumnConstraints();
+            col4.setPercentWidth(15);
+            ColumnConstraints col5 = new ColumnConstraints();
+            col5.setPercentWidth(20);
+            ColumnConstraints col6 = new ColumnConstraints();
+            col6.setPercentWidth(15);
+            gridPane.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
+
+            // Add table headers (bold and larger)
+            Label idHeader = new Label("Product ID");
+            idHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            idHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(idHeader, 0, 0);
+
+            Label nameHeader = new Label("Name of Medicine");
+            nameHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            nameHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(nameHeader, 1, 0);
+
+            Label priceHeader = new Label("Price ($)");
+            priceHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            priceHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(priceHeader, 2, 0);
+
+            Label qtyHeader = new Label("Available Quantity");
+            qtyHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            qtyHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(qtyHeader, 3, 0);
+
+            Label buyHeader = new Label("Quantity to Buy");
+            buyHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            buyHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(buyHeader, 4, 0);
+
+            Label infoHeader = new Label("Details");
+            infoHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0;");
+            infoHeader.setMaxWidth(Double.MAX_VALUE);
+            gridPane.add(infoHeader, 5, 0);
+
+            // Sample medicine data with 10 products
+            String[][] medicines = {
+                    {"P001", "Paracetamol", "5.00", "100", "Pain reliever, reduces fever."},
+                    {"P002", "Ibuprofen", "8.50", "50", "Anti-inflammatory, pain reliever."},
+                    {"P003", "Amoxicillin", "12.00", "30", "Antibiotic for bacterial infections."},
+                    {"P004", "Aspirin", "4.50", "80", "Pain reliever, blood thinner."},
+                    {"P005", "Ciprofloxacin", "15.00", "25", "Antibiotic for various infections."},
+                    {"P006", "Loratadine", "6.75", "60", "Antihistamine for allergies."},
+                    {"P007", "Omeprazole", "9.25", "40", "Reduces stomach acid."},
+                    {"P008", "Metformin", "7.80", "70", "Manages type 2 diabetes."},
+                    {"P009", "Atorvastatin", "11.50", "35", "Lowers cholesterol levels."},
+                    {"P010", "Cetirizine", "5.90", "55", "Relieves allergy symptoms."}
+            };
+
+            // Initialize array to store quantity TextFields
+            quantityFields = new TextField[medicines.length];
+
+            // Add rows for each medicine
+            for (int i = 0; i < medicines.length; i++) {
+                String id = medicines[i][0];
+                String name = medicines[i][1];
+                String price = medicines[i][2];
+                String quantity = medicines[i][3];
+                String info = medicines[i][4];
+
+                // Add medicine details (bold and larger)
+                Label idLabel = new Label(id);
+                idLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: white;");
+                idLabel.setMaxWidth(Double.MAX_VALUE);
+                gridPane.add(idLabel, 0, i + 1);
+
+                Label nameLabel = new Label(name);
+                nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: white;");
+                nameLabel.setMaxWidth(Double.MAX_VALUE);
+                gridPane.add(nameLabel, 1, i + 1);
+
+                Label priceLabel = new Label(price);
+                priceLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: white;");
+                priceLabel.setMaxWidth(Double.MAX_VALUE);
+                gridPane.add(priceLabel, 2, i + 1);
+
+                Label qtyLabel = new Label(quantity);
+                qtyLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: white;");
+                qtyLabel.setMaxWidth(Double.MAX_VALUE);
+                gridPane.add(qtyLabel, 3, i + 1);
+
+                // TextField and buttons for quantity
+                TextField quantityField = new TextField();
+                quantityField.setPrefWidth(50);
+                quantityField.setStyle("-fx-font-size: 12px; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #f0f0f0;");
+                quantityFields[i] = quantityField;
+
+                Button increaseButton = new Button("+");
+                increaseButton.setStyle("-fx-font-size: 12px; -fx-padding: 2 5; -fx-border-color: black; -fx-border-width: 1;");
+                increaseButton.setOnAction(e -> adjustQuantity(quantityField, quantity, 1));
+
+                Button decreaseButton = new Button("-");
+                decreaseButton.setStyle("-fx-font-size: 12px; -fx-padding: 2 5; -fx-border-color: black; -fx-border-width: 1;");
+                decreaseButton.setOnAction(e -> adjustQuantity(quantityField, quantity, -1));
+
+                HBox quantityBox = new HBox(5, quantityField, increaseButton, decreaseButton);
+                quantityBox.setAlignment(Pos.CENTER_LEFT);
+                quantityBox.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-background-color: white; -fx-padding: 5;");
+                gridPane.add(quantityBox, 4, i + 1);
+
+                // Eye button for more info
+                Button eyeButton = new Button("👁");
+                eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;");
+                eyeButton.setMaxWidth(Double.MAX_VALUE);
+                eyeButton.setOnAction(e -> showMoreInfo(name, info));
+                eyeButton.setOnMouseEntered(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #d0d0d0; -fx-border-radius: 50%;"));
+                eyeButton.setOnMouseExited(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;"));
+                gridPane.add(eyeButton, 5, i + 1);
+
+                // Quantity validation
+                quantityField.textProperty().addListener((obs, oldValue, newValue) -> {
+                    if (!newValue.matches("\\d*")) {
+                        quantityField.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                    try {
+                        int enteredQty = newValue.isEmpty() ? 0 : Integer.parseInt(newValue);
+                        int availableQty = Integer.parseInt(quantity);
+                        if (enteredQty > availableQty) {
+                            quantityField.setText(quantity);
+                            showAlert("Error", "Cannot buy more than available quantity (" + quantity + ").");
+                        }
+                    } catch (NumberFormatException ignored) {
+                        // Ignore if input is empty or invalid
+                    }
+                });
+            }
+
+            // Finish Order button
+            Button finishOrderButton = new Button("Finish Order");
+            finishOrderButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5 10;");
+            finishOrderButton.setMaxWidth(Double.MAX_VALUE);
+            finishOrderButton.setOnAction(e -> processOrder(medicines));
+            gridPane.add(finishOrderButton, 0, medicines.length + 1, 6, 1); // Span all 6 columns
+
+            // Wrap GridPane in VBox for resizing
+            VBox root = new VBox(gridPane);
+            root.setPadding(new Insets(10));
+            root.setAlignment(Pos.CENTER);
             scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
         }
         return scene;
+    }
+    // Method to adjust quantity using + or - buttons
+    private void adjustQuantity(TextField quantityField, String maxQuantity, int change) {
+        try {
+            int currentQty = quantityField.getText().isEmpty() ? 0 : Integer.parseInt(quantityField.getText());
+            int maxQty = Integer.parseInt(maxQuantity);
+            int newQty = currentQty + change;
+
+            if (newQty >= 0 && newQty <= maxQty) {
+                quantityField.setText(String.valueOf(newQty));
+            } else if (newQty > maxQty) {
+                quantityField.setText(maxQuantity);
+                showAlert("Error", "Cannot buy more than available quantity (" + maxQuantity + ").");
+            }
+        } catch (NumberFormatException ignored) {
+            quantityField.setText("0");
+        }
+    }
+
+    // Method to process the order
+    private void processOrder(String[][] medicines) {
+        StringBuilder orderSummary = new StringBuilder("Order Summary:\n\n");
+        double totalCost = 0.0;
+        boolean hasItems = false;
+
+        for (int i = 0; i < medicines.length; i++) {
+            String id = medicines[i][0];
+            String name = medicines[i][1];
+            double price = Double.parseDouble(medicines[i][2]);
+            String qtyText = quantityFields[i].getText();
+            int qty = qtyText.isEmpty() ? 0 : Integer.parseInt(qtyText);
+
+            if (qty > 0) {
+                hasItems = true;
+                double itemCost = price * qty;
+                totalCost += itemCost;
+                orderSummary.append(String.format("ID: %s, %s: %d units at $%.2f each = $%.2f\n", id, name, qty, price, itemCost));
+            }
+        }
+
+        if (!hasItems) {
+            showAlert("Order Empty", "No items selected. Please enter quantities to buy.");
+            return;
+        }
+
+        orderSummary.append(String.format("\nTotal Cost: $%.2f", totalCost));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order Confirmation");
+        alert.setHeaderText("Order Processed Successfully");
+        alert.setContentText(orderSummary.toString());
+        alert.showAndWait();
+
+        // Clear TextFields after order
+        for (TextField field : quantityFields) {
+            field.clear();
+        }
+    }
+
+    // Method to show more info in a new pane (Stage)
+    private void showMoreInfo(String medicineName, String info) {
+        Stage infoStage = new Stage();
+        infoStage.setTitle("More Info: " + medicineName);
+
+        VBox vbox = new VBox(10);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(20));
+
+        Label nameLabel = new Label("Medicine: " + medicineName);
+        nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+        Label infoLabel = new Label("Details: " + info);
+        infoLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+        Button closeButton = new Button("Close");
+        closeButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+        closeButton.setOnAction(e -> infoStage.close());
+
+        vbox.getChildren().addAll(nameLabel, infoLabel, closeButton);
+
+        Scene infoScene = new Scene(vbox, 300, 150);
+        infoStage.setScene(infoScene);
+        infoStage.show();
+    }
+
+    // Method to show alert dialogs
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }
