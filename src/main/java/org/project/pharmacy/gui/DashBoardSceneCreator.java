@@ -9,6 +9,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.project.pharmacy.logic.PharmacyItem;
+
+import java.util.ArrayList;
 
 //if you are going to create orders here
 //todo: Create Order , update (Latest) Order,
@@ -80,30 +83,16 @@ public class DashBoardSceneCreator implements SceneProvider {
             infoHeader.setMaxWidth(Double.MAX_VALUE);
             gridPane.add(infoHeader, 5, 0);
 
-            // Sample medicine data with 10 products
-            String[][] medicines = {
-                    {"P001", "Paracetamol", "5.00", "100", "Pain reliever, reduces fever."},
-                    {"P002", "Ibuprofen", "8.50", "50", "Anti-inflammatory, pain reliever."},
-                    {"P003", "Amoxicillin", "12.00", "30", "Antibiotic for bacterial infections."},
-                    {"P004", "Aspirin", "4.50", "80", "Pain reliever, blood thinner."},
-                    {"P005", "Ciprofloxacin", "15.00", "25", "Antibiotic for various infections."},
-                    {"P006", "Loratadine", "6.75", "60", "Antihistamine for allergies."},
-                    {"P007", "Omeprazole", "9.25", "40", "Reduces stomach acid."},
-                    {"P008", "Metformin", "7.80", "70", "Manages type 2 diabetes."},
-                    {"P009", "Atorvastatin", "11.50", "35", "Lowers cholesterol levels."},
-                    {"P010", "Cetirizine", "5.90", "55", "Relieves allergy symptoms."}
-            };
-
             // Initialize array to store quantity TextFields
-            quantityFields = new TextField[medicines.length];
+            quantityFields = new TextField[ (mainApp.pharmacyManager.getAvailableItems() ).size()];
 
             // Add rows for each medicine
-            for (int i = 0; i < medicines.length; i++) {
-                String id = medicines[i][0];
-                String name = medicines[i][1];
-                String price = medicines[i][2];
-                String quantity = medicines[i][3];
-                String info = medicines[i][4];
+            for (int i = 0; i < (mainApp.pharmacyManager.getAvailableItems() ).size(); i++) {
+                String id = String.valueOf((mainApp.pharmacyManager.getAvailableItems().get(i)).getItemId());
+                String name = (mainApp.pharmacyManager.getAvailableItems().get(i)).getName();
+                String price = String.valueOf((mainApp.pharmacyManager.getAvailableItems().get(i)).getPrice());
+                String quantity = String.valueOf((mainApp.pharmacyManager.getAvailableItems().get(i)).getQuantity());
+                String info = (mainApp.pharmacyManager.getAvailableItems().get(i)).getDescription();
 
                 // Add medicine details (bold and larger)
                 Label idLabel = new Label(id);
@@ -176,8 +165,8 @@ public class DashBoardSceneCreator implements SceneProvider {
             Button finishOrderButton = new Button("Finish Order");
             finishOrderButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5 10;");
             finishOrderButton.setMaxWidth(Double.MAX_VALUE);
-            finishOrderButton.setOnAction(e -> processOrder(medicines));
-            gridPane.add(finishOrderButton, 0, medicines.length + 1, 6, 1); // Span all 6 columns
+            finishOrderButton.setOnAction(e -> processOrder(mainApp.pharmacyManager.getAvailableItems());
+            gridPane.add(finishOrderButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() + 1, 6, 1); // Span all 6 columns
 
             // Wrap GridPane in VBox for resizing
             VBox root = new VBox(gridPane);

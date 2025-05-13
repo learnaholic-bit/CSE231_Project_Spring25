@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class MainApp extends Application {
     // Initialize logic classes
     PharmacyManager pharmacyManager = new PharmacyManager();
@@ -84,5 +86,45 @@ public class MainApp extends Application {
         // Initialize any necessary components or data here
         // For example, you can set up the pharmacy manager or load data
         //pharmacyManager.initialize();
+        pharmacyManager.addItem(new Medicine(101, "Aspirin", 5.99, "Analgesic", "NSAID",
+                "Relieves mild to moderate pain and reduces inflammation",
+                true, 100, "Acetylsalicylic Acid", "325 mg", false,
+                LocalDate.of(2026, 12, 31)));
+        pharmacyManager.addItem(new Medicine(102, "Ibuprofen", 7.49, "Analgesic", "NSAID",
+                "Treats pain, inflammation, and fever",
+                true, 80, "Ibuprofen", "200 mg", false,
+                LocalDate.of(2027, 3, 15)));
+        pharmacyManager.addItem(new Medicine(103, "Paracetamol", 4.99, "Analgesic", "Non-opioid",
+                "Reduces pain and fever",
+                true, 120, "Acetaminophen", "500 mg", false,
+                LocalDate.of(2026, 10, 20)));
+        pharmacyManager.addItem(new Medicine(104, "Amoxicillin", 12.99, "Antibiotic", "Penicillin",
+                "Treats bacterial infections",
+                true, 50, "Amoxicillin", "500 mg", true,
+                LocalDate.of(2026, 8, 10)));
+        pharmacyManager.addItem(new Medicine(105, "Metformin", 15.49, "Antidiabetic", "Biguanide",
+                "Manages type 2 diabetes",
+                true, 60, "Metformin", "500 mg", true,
+                LocalDate.of(2027, 1, 25)));
+        pharmacyManager.addItem(new Medicine(106, "Lisinopril", 10.99, "Antihypertensive", "ACE Inhibitor",
+                "Treats high blood pressure and heart failure",
+                true, 70, "Lisinopril", "10 mg", true,
+                LocalDate.of(2026, 11, 30)));
+        pharmacyManager.addItem(new Medicine(107, "Atorvastatin", 18.99, "Cholesterol", "Statin",
+                "Lowers cholesterol levels",
+                true, 45, "Atorvastatin", "20 mg", true,
+                LocalDate.of(2026, 9, 5)));
+        pharmacyManager.addItem(new Medicine(108, "Omeprazole", 13.49, "Gastrointestinal", "Proton Pump Inhibitor",
+                "Treats acid reflux and ulcers",
+                true, 55, "Omeprazole", "20 mg", false,
+                LocalDate.of(2027, 2, 28)));
+        pharmacyManager.addItem(new Medicine(109, "Levothyroxine", 11.99, "Hormone", "Thyroid",
+                "Treats hypothyroidism",
+                true, 65, "Levothyroxine", "50 mcg", true,
+                LocalDate.of(2026, 7, 15)));
+        pharmacyManager.addItem(new Medicine(110, "Hydrochlorothiazide", 8.99, "Antihypertensive", "Diuretic",
+                "Treats high blood pressure and edema",
+                true, 90, "Hydrochlorothiazide", "25 mg", true,
+                LocalDate.of(2026, 12, 10)));
     }
 }
