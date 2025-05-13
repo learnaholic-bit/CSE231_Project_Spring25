@@ -26,7 +26,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
       return scene;
     }
 
-    public Scene getScene(PharmacyItem pharmacyItem) {
+    public Scene getScene(int index) {
         if (scene == null) {
 
             Label label = new Label(" More Info Scene");
@@ -38,7 +38,8 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
             boolean isMedicine=false,isReferenceItem=false,isEquipment=false,isHealthProduct=false;
 
-            //testing
+            //
+            PharmacyItem pharmacyItem= mainApp.pharmacyManager.getAvailableItems().get(index);
             if(pharmacyItem instanceof Medicine)
                 isMedicine = true;
             else if(pharmacyItem instanceof HealthProduct)
