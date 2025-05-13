@@ -18,6 +18,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
     int addedQuantity =0;
     Label quantityLable = new Label();
     TextField quantityField = new TextField();
+    Label quantityError = new Label("");
     public MoreInfoSceneCreator(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -26,7 +27,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
       return scene;
     }
 
-    public Scene getScene(PharmacyItem pharmacyItem) {
+    public Scene getScene(int index) {
         if (scene == null) {
 
             Label label = new Label(" More Info Scene");
@@ -34,21 +35,22 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.setHgap(10);
             root.setVgap(3.5);
             int column = 1;
-            scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
+            scene = new Scene(root, 700,310);
 
             boolean isMedicine=false,isReferenceItem=false,isEquipment=false,isHealthProduct=false;
 
-            //testing
-            if(pharmacyItem instanceof Medicine)
+            //
+
+            if(mainApp.pharmacyManager.getAvailableItems().get(index) instanceof Medicine)
                 isMedicine = true;
-            else if(pharmacyItem instanceof HealthProduct)
+            else if(mainApp.pharmacyManager.getAvailableItems().get(index) instanceof HealthProduct)
                 isHealthProduct = true;
-            else if(pharmacyItem instanceof Equipment)
+            else if(mainApp.pharmacyManager.getAvailableItems().get(index) instanceof Equipment)
                 isEquipment=true;
-            else if(pharmacyItem instanceof ReferenceItem)
+            else if(mainApp.pharmacyManager.getAvailableItems().get(index) instanceof ReferenceItem)
                 isReferenceItem=true;
 
-            //pharmacyItem data
+            //mainApp.pharmacyManager.getAvailableItems().get(index) data
             String itemId ="",name ="",price ="",CATEGORY ="",subCategory ="",description ="",isAvailable ="",quantity ="";
             //medicine data
             String dosage ="",requiresPrescription ="",expiryDate ="",activeIngredient ="";
@@ -60,14 +62,14 @@ public class MoreInfoSceneCreator implements SceneProvider {
             String warrantyPeriod="",type ="";
 
             //setting general data strings
-            itemId ="Item Id:\t"+pharmacyItem.getItemId();
-            name = "Name:\t"+pharmacyItem.getName();
-            price ="Price:\t"+pharmacyItem.getPrice();
-            CATEGORY ="category:\t"+pharmacyItem.getCategory();
-            subCategory ="SubCategory:\t"+pharmacyItem.getSubCategory();
-            description ="Description:\t"+pharmacyItem.getDescription();
-            isAvailable="Available:\t"+pharmacyItem.getAvailable();
-            quantity ="Quantity:\t"+pharmacyItem.getQuantity();
+            itemId ="Item Id:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getItemId();
+            name = "Name:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getName();
+            price ="Price:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getPrice();
+            CATEGORY ="category:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getCategory();
+            subCategory ="SubCategory:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getSubCategory();
+            description ="Description:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getDescription();
+            isAvailable="Available:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getAvailable();
+            quantity ="Quantity:\t"+mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity();
 
             //setting general data labels
             Label itemIdLable = new Label(itemId);
@@ -77,6 +79,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Label subCategoryLable = new Label(subCategory);
             Label descriptionLable = new Label(description);
             Label isAvailableLable = new Label(isAvailable);
+
             quantityLable.setText(quantity);
             quantityField.setText("0");
 
@@ -102,7 +105,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Button DashBoard = new Button("Dash Board");
 
 
-            addQuantity.setOnAction(e -> {addingQuantity(pharmacyItem);});
+            addQuantity.setOnAction(e -> {addingQuantity(index);});
             DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //general data
             root.add(itemIdLable, column, 2);
@@ -115,20 +118,21 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.add(quantityLable, column, 9);
             root.add(addQuantity, column, 0);
             root.add(quantityField, column+1, 0);
+            root.add(quantityError, column+1, 1);
             root.add(DashBoard, 5, 13);
             //setting rest of data according to its type
             if(isMedicine)
             {
                 //medicine
-                expiryDate = "Expiry Date:\t"+((Medicine) pharmacyItem).getExpiryDate();
-                activeIngredient= "ActiveIngredient:\t"+((Medicine) pharmacyItem).getActiveIngredient();
-                dosage ="Dosage:\t"+((Medicine) pharmacyItem).getDosage();
-                requiresPrescription ="Requires Prescription:\t"+((Medicine) pharmacyItem).getRequiresPrescription();
+                expiryDate = "Expiry Date:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getExpiryDate();
+                activeIngredient= "ActiveIngredient:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getActiveIngredient();
+                dosage ="Dosage:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getDosage();
+                requiresPrescription ="Requires Prescription:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getRequiresPrescription();
 
-                expiryDateLable.setText("Expiry Date:\t"+((Medicine) pharmacyItem).getExpiryDate());
-                activeIngrediantLable.setText("ActiveIngredient:\t"+((Medicine) pharmacyItem).getActiveIngredient());
-                DosageLable.setText("Dosage:\t"+((Medicine) pharmacyItem).getDosage());
-                if(((Medicine)pharmacyItem).getRequiresPrescription())
+                expiryDateLable.setText("Expiry Date:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getExpiryDate());
+                activeIngrediantLable.setText("ActiveIngredient:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getActiveIngredient());
+                DosageLable.setText("Dosage:\t"+((Medicine) mainApp.pharmacyManager.getAvailableItems().get(index)).getDosage());
+                if(((Medicine)mainApp.pharmacyManager.getAvailableItems().get(index)).getRequiresPrescription())
                 requiresPrescriptionLable.setText("Requires Prescription:\tyes");
                 else
                 requiresPrescriptionLable.setText("Requires Prescription:\tno");
@@ -142,11 +146,11 @@ public class MoreInfoSceneCreator implements SceneProvider {
             if(isHealthProduct)
             {
                 //health product
-                expiryDate = "Expiry Date:\t"+((HealthProduct) pharmacyItem).getExpiryDate();
-                isOrganic = "is Organic:\t"+((HealthProduct) pharmacyItem).getIsOrganic();
+                expiryDate = "Expiry Date:\t"+((HealthProduct) mainApp.pharmacyManager.getAvailableItems().get(index)).getExpiryDate();
+                isOrganic = "is Organic:\t"+((HealthProduct) mainApp.pharmacyManager.getAvailableItems().get(index)).getIsOrganic();
 
                 expiryDateLable.setText("Expiry Date:\t"+expiryDate);
-                if(((HealthProduct)pharmacyItem).getIsOrganic())
+                if(((HealthProduct)mainApp.pharmacyManager.getAvailableItems().get(index)).getIsOrganic())
                 isOraganicLable.setText("isOrganic:\tyes");
                 else
                     isOraganicLable.setText("isOrganic:\tno");
@@ -157,11 +161,11 @@ public class MoreInfoSceneCreator implements SceneProvider {
             if(isReferenceItem)
             {
                 //reference item
-                publisher = "Publisher:\t"+((ReferenceItem) pharmacyItem).getPublisher();
-                publicationDate = "Publication Date:\t"+((ReferenceItem) pharmacyItem).getPublicationDate();
+                publisher = "Publisher:\t"+((ReferenceItem) mainApp.pharmacyManager.getAvailableItems().get(index)).getPublisher();
+                publicationDate = "Publication Date:\t"+((ReferenceItem) mainApp.pharmacyManager.getAvailableItems().get(index)).getPublicationDate();
 
-                publicationDateLable.setText("Publication Date:\t"+((ReferenceItem) pharmacyItem).getPublicationDate());
-                publisherLable.setText("Publisher:\t"+((ReferenceItem) pharmacyItem).getPublisher());
+                publicationDateLable.setText("Publication Date:\t"+((ReferenceItem) mainApp.pharmacyManager.getAvailableItems().get(index)).getPublicationDate());
+                publisherLable.setText("Publisher:\t"+((ReferenceItem) mainApp.pharmacyManager.getAvailableItems().get(index)).getPublisher());
 
                 root.add(publisherLable, column, 10);
                 root.add(publicationDateLable, column, 11);
@@ -169,11 +173,11 @@ public class MoreInfoSceneCreator implements SceneProvider {
             if(isEquipment)
             {
                 //equipment
-                type = "type:\t"+((Equipment) pharmacyItem).getType();
-                warrantyPeriod = "Warranty Period:\t"+((Equipment) pharmacyItem).getWarrantyPeriod();
+                type = "type:\t"+((Equipment) mainApp.pharmacyManager.getAvailableItems().get(index)).getType();
+                warrantyPeriod = "Warranty Period:\t"+((Equipment) mainApp.pharmacyManager.getAvailableItems().get(index)).getWarrantyPeriod();
 
                 warrantyPeriodLable.setText("Warranty Period:\t"+warrantyPeriod);
-                typeLable.setText("Type:\t"+((Equipment) pharmacyItem).getType());
+                typeLable.setText("Type:\t"+((Equipment) mainApp.pharmacyManager.getAvailableItems().get(index)).getType());
 
                 root.add(typeLable, column, 10);
                 root.add(warrantyPeriodLable, column, 11);
@@ -181,20 +185,24 @@ public class MoreInfoSceneCreator implements SceneProvider {
         }
         return scene;
     }
-    void addingQuantity(PharmacyItem pharmacyItem) {
+    void addingQuantity(int index) {
         addedQuantityString = quantityField.getText();
         try{
             addedQuantity = Integer.parseInt(addedQuantityString);
-            pharmacyItem.setQuantity(pharmacyItem.getQuantity() + addedQuantity);
-            quantityLable.setText("Quantity:\t" + pharmacyItem.getQuantity());
-
+            mainApp.pharmacyManager.getAvailableItems().get(index).setQuantity(mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity() + addedQuantity);
+            quantityLable.setText("Quantity:\t" + mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity());
+            quantityError.setText("");
         }
         catch(NumberFormatException e)
-        {}
+        {
+            quantityError.setText("Error: enter number not a text");
+        }
         catch(IllegalArgumentException e)
-        {}
+        {
+            quantityError.setText("Error: enter postive number not a negative number ");
+        }
         finally {
-            quantityField.setText("0");
+
         }
 
     }
