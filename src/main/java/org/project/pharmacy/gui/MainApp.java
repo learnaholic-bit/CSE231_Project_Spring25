@@ -75,6 +75,9 @@ public class MainApp extends Application {
     public void switchToCheckOutScene() {
         switchToScene(checkoutSceneCreator.getScene());
     }
+    public void switchToMoreInfoScene(PharmacyItem newPharmacyItem) {
+        switchToScene(moreInfoSceneCreator.getScene(newPharmacyItem));
+    }
     public void switchToMoreInfoScene() {
         switchToScene(moreInfoSceneCreator.getScene());
     }

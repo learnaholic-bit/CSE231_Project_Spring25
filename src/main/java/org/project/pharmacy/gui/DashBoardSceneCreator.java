@@ -139,7 +139,7 @@ public class DashBoardSceneCreator implements SceneProvider {
                 Button eyeButton = new Button("👁");
                 eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;");
                 eyeButton.setMaxWidth(Double.MAX_VALUE);
-                eyeButton.setOnAction(e -> showMoreInfo(name, info));
+                eyeButton.setOnAction(e ->showMoreInfo(name, info)); //mainApp.switchToMoreInfoScene((mainApp.pharmacyManager.getAvailableItems()).get(i)));//
                 eyeButton.setOnMouseEntered(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #d0d0d0; -fx-border-radius: 50%;"));
                 eyeButton.setOnMouseExited(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;"));
                 gridPane.add(eyeButton, 5, i + 1);
@@ -259,7 +259,7 @@ public class DashBoardSceneCreator implements SceneProvider {
             field.clear();
         }
     }
-
+/*
     // Method to show more info in a new pane (Stage)
     private void showMoreInfo(String medicineName, String info) {
         Stage infoStage = new Stage();
@@ -291,6 +291,6 @@ public class DashBoardSceneCreator implements SceneProvider {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
+    }*/
 
 }
