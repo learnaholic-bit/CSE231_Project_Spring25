@@ -88,6 +88,17 @@ public class SearchSceneCreator implements SceneProvider{
                     mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
                 }
             });
+            search.setOnAction(e -> {
+                if (search.getText() == "") {
+                    throw new IllegalArgumentException("Invalid String");
+                }
+                if (observableSearchItems.isEmpty()) {
+                    throw new IllegalArgumentException("Not Found");
+                }
+                else if(!observableSearchItems.isEmpty()) {
+                    mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
+                }
+            });
             //searchButton.setOnAction();
             /*
             observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
