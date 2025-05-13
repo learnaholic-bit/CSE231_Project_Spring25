@@ -204,7 +204,7 @@ public class DashBoardSceneCreator implements SceneProvider {
             String id = String.valueOf((pharmacyItems.get(i)).getItemId());
             String name = (pharmacyItems.get(i)).getName();
             double price = (pharmacyItems.get(i)).getPrice();
-            String qtyText = String.valueOf((pharmacyItems.get(i)).getQuantity());
+            String qtyText = quantityFields[i].getText();
             int qty = qtyText.isEmpty() ? 0 : Integer.parseInt(qtyText);
 
             if (qty > 0) {
