@@ -39,9 +39,9 @@ public class DashBoardSceneCreator implements SceneProvider {
 
             // Set column constraints for resizing
             ColumnConstraints col1 = new ColumnConstraints();
-            col1.setPercentWidth(20);
+            col1.setPercentWidth(15);
             ColumnConstraints col2 = new ColumnConstraints();
-            col2.setPercentWidth(15);
+            col2.setPercentWidth(20);
             ColumnConstraints col3 = new ColumnConstraints();
             col3.setPercentWidth(15);
             ColumnConstraints col4 = new ColumnConstraints();
