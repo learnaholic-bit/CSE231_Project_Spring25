@@ -194,6 +194,76 @@ public class PharmacyManager extends Person {
         System.out.println("Items sorted by price " + (descending != null && descending ? "descending." : "ascending."));
     }
 
+    /////////////////////////////////////////////////////////////////
+    /**
+     * Sorts items in the inventory by their name and return new array.
+     *
+     * @param descending If true, sorts in descending order; otherwise, ascending.
+     */
+    public ArrayList<PharmacyItem> sortItemsByNameArr(Boolean descending) {
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
+
+        if (descending != null && descending) {
+            sortedItem.sort(Comparator.comparing(PharmacyItem::getName).reversed());
+        } else {
+            sortedItem.sort(Comparator.comparing(PharmacyItem::getName));
+        }
+       //System.out.println("Items sorted by name " + (descending != null && descending ? "descending." : "ascending."));
+        return sortedItem;
+    }
+
+    /**
+     * Sorts items in the inventory by their ID.
+     *
+     * @param descending If true, sorts in descending order; otherwise, ascending.
+     */
+    public ArrayList<PharmacyItem> sortItemsByIdArr(Boolean descending) {
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
+        if (descending != null && descending) {
+            sortedItem.sort(Comparator.comparingInt(PharmacyItem::getItemId).reversed());
+        } else {
+            sortedItem.sort(Comparator.comparingInt(PharmacyItem::getItemId));
+        }
+        //System.out.println("Items sorted by ID " + (descending != null && descending ? "descending." : "ascending."));
+        return sortedItem;
+    }
+
+    /**
+     * Sorts items in the inventory by their quantity.
+     *
+     * @param descending If true, sorts in descending order; otherwise, ascending.
+     */
+    public ArrayList<PharmacyItem> sortItemsByQuantityArr(Boolean descending) {
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
+        if (descending != null && descending) {
+            sortedItem.sort(Comparator.comparingInt(PharmacyItem::getQuantity).reversed());
+        } else {
+            sortedItem.sort(Comparator.comparingInt(PharmacyItem::getQuantity));
+        }
+        //System.out.println("Items sorted by quantity " + (descending != null && descending ? "descending." : "ascending."));
+        return sortedItem;
+    }
+
+    /**
+     * Sorts items in the inventory by their price.
+     *
+     * @param descending If true, sorts in descending order; otherwise, ascending.
+     */
+    public ArrayList<PharmacyItem> sortItemsByPriceArr(Boolean descending) {
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
+        if (descending != null && descending) {
+            sortedItem.sort(Comparator.comparingDouble(PharmacyItem::getPrice).reversed());
+        } else {
+            sortedItem.sort(Comparator.comparingDouble(PharmacyItem::getPrice));
+        }
+        //System.out.println("Items sorted by price " + (descending != null && descending ? "descending." : "ascending."));
+        return sortedItem;
+    }
+
+
+
+
+
     /**
      * Retrieves all available items in the inventory.
      *

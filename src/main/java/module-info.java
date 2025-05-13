@@ -1,3 +1,21 @@
+/*module org.project.pharmacy {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires javafx.web;
+
+    requires org.controlsfx.controls;
+    requires com.dlsc.formsfx;
+    requires net.synedra.validatorfx;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.bootstrapfx.core;
+    requires eu.hansolo.tilesfx;
+    requires jbcrypt;
+
+    opens org.project.pharmacy to javafx.fxml;
+    exports org.project.pharmacy;
+    exports org.project.pharmacy.gui;
+    opens org.project.pharmacy.gui to javafx.fxml;
+}*/
 module org.project.pharmacy {
     requires javafx.controls;
     requires javafx.fxml;
@@ -15,4 +33,7 @@ module org.project.pharmacy {
     exports org.project.pharmacy;
     exports org.project.pharmacy.gui;
     opens org.project.pharmacy.gui to javafx.fxml;
+
+    // Added to allow javafx.base to access PharmacyItem
+    opens org.project.pharmacy.logic to javafx.base;
 }

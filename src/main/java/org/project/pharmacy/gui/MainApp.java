@@ -42,7 +42,8 @@ public class MainApp extends Application {
 
         // Initialize the application
         initialize();
-        this.switchToScene(dashBoardSceneCreator.getScene());
+        //this.switchToScene(dashBoardSceneCreator.getScene());
+        this.switchToSearchScene();
     }
 
     public static void main(String[] args) {
