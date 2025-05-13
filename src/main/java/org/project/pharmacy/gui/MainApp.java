@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class MainApp extends Application {
     // Initialize logic classes
@@ -42,8 +43,8 @@ public class MainApp extends Application {
 
         // Initialize the application
         initialize();
-        //this.switchToScene(dashBoardSceneCreator.getScene());
-        this.switchToSearchScene();
+        this.switchToScene(dashBoardSceneCreator.getScene());
+        //this.switchToSearchScene();
     }
 
     public static void main(String[] args) {
@@ -74,9 +75,8 @@ public class MainApp extends Application {
     public void switchToCheckOutScene() {
         switchToScene(checkoutSceneCreator.getScene());
     }
-    public void switchToMoreInfoScene() {switchToScene(moreInfoSceneCreator.getScene());}
-    public void switchToMoreInfoScene(PharmacyItem newPharmacyItem) {
-        switchToScene(moreInfoSceneCreator.getScene(newPharmacyItem));
+    public void switchToMoreInfoScene() {
+        switchToScene(moreInfoSceneCreator.getScene());
     }
     public void switchToSearchScene() {
         switchToScene(searchSceneCreator.getScene());
@@ -168,5 +168,31 @@ public class MainApp extends Application {
         pharmacyManager.addItem(new Equipment(307, "Pharmacy Scale", 99.99, "Pharmacy Tool", "Weighing",
                 "High-precision scale for compounding medications",
                 true, 10, "Electronic", 48));
+        /////////////////////////////////////////////////////////////////////////////
+        pharmacyManager.addItem(new ReferenceItem(401, "Pharmacology Essentials", 89.99, "Reference Book", "Pharmacology",
+                "Comprehensive guide to pharmacological principles",
+                true, 10, "Lippincott Williams & Wilkins",
+                new Date(), true));
+        pharmacyManager.addItem(new ReferenceItem(402, "Pharmaceutical Calculations", 59.99, "Reference Book", "Calculations",
+                "Textbook for accurate dosage and compounding calculations",
+                true, 15, "Wolters Kluwer",
+                new Date(), true));
+        pharmacyManager.addItem(new ReferenceItem(403, "Drug Interaction Handbook", 74.99, "Reference Book", "Drug Interactions",
+                "Detailed guide to drug interactions and contraindications",
+                true, 8, "Lexicomp",
+                new Date(), true));
+        pharmacyManager.addItem(new ReferenceItem(404, "Herbal Supplements Guide", 44.99, "Reference Book", "Herbal Medicine",
+                "Overview of herbal supplements and their uses",
+                true, 20, "Thieme Medical Publishers",
+                new Date(), false));
+        pharmacyManager.addItem(new ReferenceItem(405, "Pharmacy Law and Ethics", 69.99, "Reference Book", "Legal",
+                "Covers pharmacy regulations and ethical practices",
+                true, 12, "American Pharmacists Association",
+                new Date(), true));
+        pharmacyManager.addItem(new ReferenceItem(406, "OTC Medication Guide", 39.99, "Reference Book", "Over-the-Counter",
+                "Consumer guide to over-the-counter medications",
+                true, 25, "Consumer Reports",
+                new Date(), false));
+
     }
 }
