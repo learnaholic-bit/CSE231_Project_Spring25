@@ -99,10 +99,11 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
             //setting adding quantity feature
             Button addQuantity = new Button("Add Quantity");
+            Button DashBoard = new Button("Dash Board");
 
 
             addQuantity.setOnAction(e -> {addingQuantity(pharmacyItem);});
-
+            DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //general data
             root.add(itemIdLable, column, 2);
             root.add(nameLable, column, 3);
@@ -114,7 +115,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.add(quantityLable, column, 9);
             root.add(addQuantity, column, 0);
             root.add(quantityField, column+1, 0);
-
+            root.add(DashBoard, 11, 11);
             //setting rest of data according to its type
             if(isMedicine)
             {
