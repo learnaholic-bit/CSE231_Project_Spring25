@@ -41,13 +41,13 @@ public class DashBoardSceneCreator implements SceneProvider {
             ColumnConstraints col1 = new ColumnConstraints();
             col1.setPercentWidth(15);
             ColumnConstraints col2 = new ColumnConstraints();
-            col2.setPercentWidth(20);
+            col2.setPercentWidth(25);
             ColumnConstraints col3 = new ColumnConstraints();
             col3.setPercentWidth(15);
             ColumnConstraints col4 = new ColumnConstraints();
             col4.setPercentWidth(15);
             ColumnConstraints col5 = new ColumnConstraints();
-            col5.setPercentWidth(20);
+            col5.setPercentWidth(15);
             ColumnConstraints col6 = new ColumnConstraints();
             col6.setPercentWidth(15);
             gridPane.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6);
