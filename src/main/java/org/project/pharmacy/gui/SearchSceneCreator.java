@@ -69,12 +69,15 @@ public class SearchSceneCreator implements SceneProvider{
 
 
             //Display Array List
-            searchResult = TableUtils.createSearchResultTable(observableSearchItems);
+            //searchResult = TableUtils.createSearchResultTable(observableSearchItems);
+            searchResult = TableUtils.createSearchResultTable(FXCollections.observableArrayList(mainApp.pharmacyManager.getAvailableItems()));
             search.setOnKeyTyped(e -> {
                 //System.out.println("entering");
                 observableSearchItems = mainApp.pharmacyManager.searchByName(search.getText());
                 searchResult.setItems(observableSearchItems);
+                if (search.getText() == "") searchResult.setItems(FXCollections.observableArrayList(mainApp.pharmacyManager.getAvailableItems()));
             });
+            //searchButton.setOnAction();
             /*
             observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
             searchResult = TableUtils.createSearchResultTable(observableSearchItems);  */      //for test
