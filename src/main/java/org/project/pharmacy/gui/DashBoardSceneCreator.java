@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.project.pharmacy.logic.PharmacyItem;
 
@@ -193,6 +194,7 @@ public class DashBoardSceneCreator implements SceneProvider {
             root.setAlignment(Pos.CENTER);
 
             scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
+            //scene = new Scene(root, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
 
 // Bind ScrollPane height to scene height after rendering
             Platform.runLater(() -> {

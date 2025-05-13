@@ -44,8 +44,9 @@ public class MainApp extends Application {
         // Initialize the application
         initialize();
 
-       // this.switchToSearchScene();
+       //this.switchToSearchScene();
         this.switchToScene(dashBoardSceneCreator.getScene());
+        //primaryStage.setFullScreen(true);
     }
 
     public static void main(String[] args) {
