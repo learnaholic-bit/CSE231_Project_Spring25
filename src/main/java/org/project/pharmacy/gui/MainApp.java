@@ -128,5 +128,43 @@ public class MainApp extends Application {
                 "Treats high blood pressure and edema",
                 true, 90, "Hydrochlorothiazide", "25 mg", true,
                 LocalDate.of(2026, 12, 10)));
+        /////////////////////////////////////////////////////////////////////////////////////////
+        pharmacyManager.addItem(new HealthProduct(201, "Aspirin (Herbal Alternative)", 6.99, "Supplement", "Pain Relief",
+                "Natural pain relief supplement inspired by willow bark",
+                true, 150, true, LocalDate.of(2026, 6, 30)));
+        pharmacyManager.addItem(new HealthProduct(202, "Ibuprofen (Plant-Based)", 8.49, "Supplement", "Anti-Inflammatory",
+                "Plant-based anti-inflammatory supplement",
+                true, 100, true, LocalDate.of(2026, 9, 15)));
+        pharmacyManager.addItem(new HealthProduct(203, "Paracetamol (Herbal Substitute)", 5.99, "Supplement", "Fever Reducer",
+                "Herbal supplement for fever and mild pain relief",
+                true, 200, true, LocalDate.of(2027, 1, 10)));
+        pharmacyManager.addItem(new HealthProduct(204, "Metformin (Natural Support)", 16.99, "Supplement", "Blood Sugar Support",
+                "Natural supplement to support healthy blood sugar levels",
+                true, 80, true, LocalDate.of(2026, 11, 20)));
+        pharmacyManager.addItem(new HealthProduct(205, "Omeprazole (Digestive Aid)", 14.49, "Supplement", "Digestive Health",
+                "Natural digestive aid to support stomach acid balance",
+                true, 90, true, LocalDate.of(2026, 8, 5)));
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        pharmacyManager.addItem(new Equipment(301, "Digital Blood Pressure Monitor", 49.99, "Medical Device", "Diagnostic",
+                "Accurate blood pressure and pulse measurement",
+                true, 20, "Electronic", 24));
+        pharmacyManager.addItem(new Equipment(302, "Glucometer", 29.99, "Medical Device", "Monitoring",
+                "Measures blood glucose levels for diabetes management",
+                true, 30, "Electronic", 12));
+        pharmacyManager.addItem(new Equipment(303, "Nebulizer", 79.99, "Medical Device", "Respiratory",
+                "Delivers medication in mist form for respiratory conditions",
+                true, 15, "Electronic", 36));
+        pharmacyManager.addItem(new Equipment(304, "Thermometer (Infrared)", 39.99, "Medical Device", "Diagnostic",
+                "Non-contact temperature measurement",
+                true, 25, "Electronic", 18));
+        pharmacyManager.addItem(new Equipment(305, "Pill Counter Tray", 19.99, "Pharmacy Tool", "Dispensing",
+                "Manual tray for counting and sorting pills",
+                true, 50, "Manual", 6));
+        pharmacyManager.addItem(new Equipment(306, "Pulse Oximeter", 34.99, "Medical Device", "Monitoring",
+                "Measures oxygen saturation and heart rate",
+                true, 22, "Electronic", 24));
+        pharmacyManager.addItem(new Equipment(307, "Pharmacy Scale", 99.99, "Pharmacy Tool", "Weighing",
+                "High-precision scale for compounding medications",
+                true, 10, "Electronic", 48));
     }
 }
