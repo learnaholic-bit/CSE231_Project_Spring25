@@ -139,8 +139,8 @@ public class DashBoardSceneCreator implements SceneProvider {
                 Button eyeButton = new Button("👁");
                 eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;");
                 eyeButton.setMaxWidth(Double.MAX_VALUE);
-                PharmacyItem infoPharmacyItem = (mainApp.pharmacyManager.getAvailableItems()).get(i);
-                eyeButton.setOnAction(e ->mainApp.switchToMoreInfoScene(infoPharmacyItem));//showMoreInfo(name, info));
+                int index =i;
+                eyeButton.setOnAction(e ->mainApp.switchToMoreInfoScene(index));//showMoreInfo(name, info));
                 eyeButton.setOnMouseEntered(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #d0d0d0; -fx-border-radius: 50%;"));
                 eyeButton.setOnMouseExited(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;"));
                 gridPane.add(eyeButton, 5, i + 1);
