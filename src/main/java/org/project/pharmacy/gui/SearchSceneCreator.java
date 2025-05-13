@@ -61,6 +61,20 @@ public class SearchSceneCreator implements SceneProvider{
             filterIcon.setFitWidth(20);
             filterButton.setGraphic(filterIcon);*/
 
+            Button dashboardButton = new Button("Dashboard");
+            /*Image searchImage = new Image("images/filter_icon.png");
+            ImageView searchIcon = new ImageView(searchImage);
+            searchIcon.setFitHeight(20);
+            searchIcon.setFitWidth(20);
+            searchButton.setGraphic(searchIcon);*/
+
+            /*//search label
+            Label searchLabel = new Label("Search");
+            //create Hbox for return
+            HBox topHbox = new HBox();
+            topHbox.getChildren().addAll(dashboardButton, searchLabel);*/
+
+
             // Add components to HBox
             hbox.getChildren().addAll(search, searchButton, filterButton);
             hbox.setSpacing(10);
@@ -110,6 +124,7 @@ public class SearchSceneCreator implements SceneProvider{
                     FXCollections.sort(observableSearchItems);
                 }
             });
+            dashboardButton.setOnAction(e -> mainApp.switchToDashBoardScene());
             //searchButton.setOnAction();
             /*
             observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
@@ -122,21 +137,21 @@ public class SearchSceneCreator implements SceneProvider{
 
             //observableItems.setAll(items);
             // Add HBox to VBox
-            vbox.getChildren().addAll(hbox, searchResult);
+            vbox.getChildren().addAll(dashboardButton, hbox, searchResult);
             vbox.setSpacing(20); // This will apply if you add more children later
             vbox.setPadding(new Insets(20, 10, 10, 10)); // Add padding: top=20, right=10, bottom=10, left=10
 
-            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH*1.2, SceneConfig.SCENE_HEIGHT);
+            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH*1.5, SceneConfig.SCENE_HEIGHT*1.2);
         }
         return scene;
     }
     class TableUtils {
         public static TableView<PharmacyItem> createSearchResultTable(ObservableList<PharmacyItem> items) {
             TableView<PharmacyItem> searchResult = new TableView<>(items);
-            /*
+
             TableColumn<PharmacyItem, Integer> idColumn = new TableColumn<>("ID");
             idColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
-            */
+
             TableColumn<PharmacyItem, String> nameColumn = new TableColumn<>("Name");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -176,13 +191,14 @@ public class SearchSceneCreator implements SceneProvider{
             isAvailableColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1)); // 10% for Available
             */
             // Bind column widths to a percentage of TableView width
+            idColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1));        // 10% for ID
             nameColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.5));      // 30% for Name
-            priceColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.4));    // 15% for Price
-            isAvailableColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1)); // 10% for Available
+            priceColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.25));    // 15% for Price
+            isAvailableColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.15)); // 10% for Available
 
             searchResult.getColumns().clear();
             //searchResult.getColumns().addAll(idColumn, nameColumn, priceColumn, descriptionColumn, isAvailableColumn);
-            searchResult.getColumns().addAll(nameColumn, priceColumn, isAvailableColumn);
+            searchResult.getColumns().addAll(idColumn, nameColumn, priceColumn, isAvailableColumn);
             searchResult.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
             return searchResult;
