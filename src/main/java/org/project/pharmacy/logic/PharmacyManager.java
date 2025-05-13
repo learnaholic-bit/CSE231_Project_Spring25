@@ -205,7 +205,7 @@ public class PharmacyManager extends Person {
      * @param descending If true, sorts in descending order; otherwise, ascending.
      */
     public ArrayList<PharmacyItem> sortItemsByNameArr(Boolean descending) {
-        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) getAvailableItems().clone();
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
 
         if (descending != null && descending) {
             sortedItem.sort(Comparator.comparing(PharmacyItem::getName).reversed());
@@ -222,7 +222,7 @@ public class PharmacyManager extends Person {
      * @param descending If true, sorts in descending order; otherwise, ascending.
      */
     public ArrayList<PharmacyItem> sortItemsByIdArr(Boolean descending) {
-        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) getAvailableItems().clone();
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
         if (descending != null && descending) {
             sortedItem.sort(Comparator.comparingInt(PharmacyItem::getItemId).reversed());
         } else {
@@ -238,7 +238,7 @@ public class PharmacyManager extends Person {
      * @param descending If true, sorts in descending order; otherwise, ascending.
      */
     public ArrayList<PharmacyItem> sortItemsByQuantityArr(Boolean descending) {
-        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) getAvailableItems().clone();
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
         if (descending != null && descending) {
             sortedItem.sort(Comparator.comparingInt(PharmacyItem::getQuantity).reversed());
         } else {
@@ -254,7 +254,7 @@ public class PharmacyManager extends Person {
      * @param descending If true, sorts in descending order; otherwise, ascending.
      */
     public ArrayList<PharmacyItem> sortItemsByPriceArr(Boolean descending) {
-        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) getAvailableItems().clone();
+        ArrayList <PharmacyItem> sortedItem = (ArrayList<PharmacyItem>) pharmacyItems.clone();
         if (descending != null && descending) {
             sortedItem.sort(Comparator.comparingDouble(PharmacyItem::getPrice).reversed());
         } else {

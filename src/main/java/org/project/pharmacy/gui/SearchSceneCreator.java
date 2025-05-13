@@ -37,7 +37,7 @@ public class SearchSceneCreator implements SceneProvider{
     }
 
     @Override
-    public Scene getScene() {
+    public Scene getScene() throws RuntimeException{
         if (scene == null) {
             VBox vbox = new VBox();
             HBox hbox = new HBox();
@@ -77,6 +77,18 @@ public class SearchSceneCreator implements SceneProvider{
                 searchResult.setItems(observableSearchItems);
                 if (search.getText() == "") searchResult.setItems(FXCollections.observableArrayList(mainApp.pharmacyManager.getAvailableItems()));
             });
+            searchButton.setOnAction(e -> {
+                if (search.getText() == "") {
+                    throw new IllegalArgumentException("Invalid String");
+                }
+                if (observableSearchItems.isEmpty()) {
+                    throw new IllegalArgumentException("Not Found");
+                }
+                else if(!observableSearchItems.isEmpty()) {
+                    observableSearchItems.getFirst();
+
+                }
+            });
             //searchButton.setOnAction();
             /*
             observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
@@ -93,7 +105,7 @@ public class SearchSceneCreator implements SceneProvider{
             vbox.setSpacing(20); // This will apply if you add more children later
             vbox.setPadding(new Insets(20, 10, 10, 10)); // Add padding: top=20, right=10, bottom=10, left=10
 
-            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
+            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH*1.2, SceneConfig.SCENE_HEIGHT);
         }
         return scene;
     }
