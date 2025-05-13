@@ -15,7 +15,6 @@ import java.util.Date;
 public class MainApp extends Application {
     // Initialize logic classes
     PharmacyManager pharmacyManager = new PharmacyManager();
-
     //Initialize the GUI components
     CheckOutSceneCreator checkoutSceneCreator = new CheckOutSceneCreator(this);
     DashBoardSceneCreator dashBoardSceneCreator = new DashBoardSceneCreator(this);

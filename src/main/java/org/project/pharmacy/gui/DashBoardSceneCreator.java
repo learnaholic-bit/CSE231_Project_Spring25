@@ -139,7 +139,8 @@ public class DashBoardSceneCreator implements SceneProvider {
                 Button eyeButton = new Button("👁");
                 eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;");
                 eyeButton.setMaxWidth(Double.MAX_VALUE);
-                eyeButton.setOnAction(e ->showMoreInfo(name, info)); //mainApp.switchToMoreInfoScene((mainApp.pharmacyManager.getAvailableItems()).get(i)));//
+                PharmacyItem infoPharmacyItem = (mainApp.pharmacyManager.getAvailableItems()).get(i);
+                eyeButton.setOnAction(e ->mainApp.switchToMoreInfoScene(infoPharmacyItem));//showMoreInfo(name, info));
                 eyeButton.setOnMouseEntered(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #d0d0d0; -fx-border-radius: 50%;"));
                 eyeButton.setOnMouseExited(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;"));
                 gridPane.add(eyeButton, 5, i + 1);
@@ -283,7 +284,7 @@ public class DashBoardSceneCreator implements SceneProvider {
         infoStage.setScene(infoScene);
         infoStage.show();
     }
-
+    }*/
     // Method to show alert dialogs
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -291,6 +292,6 @@ public class DashBoardSceneCreator implements SceneProvider {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }*/
 
-}
+
+}}
