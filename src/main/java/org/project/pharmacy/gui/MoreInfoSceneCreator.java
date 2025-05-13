@@ -115,7 +115,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.add(quantityLable, column, 9);
             root.add(addQuantity, column, 0);
             root.add(quantityField, column+1, 0);
-            root.add(DashBoard, 8, 13);
+            root.add(DashBoard, 5, 13);
             //setting rest of data according to its type
             if(isMedicine)
             {
