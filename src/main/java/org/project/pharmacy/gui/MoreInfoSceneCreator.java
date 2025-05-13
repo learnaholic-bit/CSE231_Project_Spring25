@@ -14,11 +14,6 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
     private MainApp mainApp;
     private Scene scene;
-    String addedQuantityString ="0";
-    int addedQuantity =0;
-    Label quantityLable = new Label();
-    TextField quantityField = new TextField();
-    Label quantityError = new Label("");
     public MoreInfoSceneCreator(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -80,9 +75,15 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Label descriptionLable = new Label(description);
             Label isAvailableLable = new Label(isAvailable);
 
+            Label quantityLable = new Label();
             quantityLable.setText(quantity);
-            quantityField.setText("0");
+            Label errorLable = new Label("");
 
+            TextField quantityField = new TextField();
+            TextField priceField = new TextField();
+
+            quantityField.setText("0");
+            priceField.setText("0");
             //setting medicine labels
             Label activeIngrediantLable = new Label(activeIngredient);
             Label DosageLable = new Label(dosage);
@@ -100,13 +101,15 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Label typeLable = new Label(type);
             Label warrantyPeriodLable = new Label(warrantyPeriod);
 
+            Button DashBoard = new Button("Dash Board");
+            DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //setting adding quantity feature
             Button addQuantity = new Button("Add Quantity");
-            Button DashBoard = new Button("Dash Board");
+            addQuantity.setOnAction(e -> {addingQuantity(index,quantityField,quantityLable,errorLable);});
+            //setting edit price
+            Button editPrice = new Button("Edit Price");
+            editPrice.setOnAction(e-> editingPrice(index,priceField,priceLable,errorLable));
 
-
-            addQuantity.setOnAction(e -> {addingQuantity(index);});
-            DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //general data
             root.add(itemIdLable, column, 2);
             root.add(nameLable, column, 3);
@@ -117,8 +120,10 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.add(isAvailableLable, column, 8);
             root.add(quantityLable, column, 9);
             root.add(addQuantity, column, 0);
+            root.add(editPrice, column, 1);
             root.add(quantityField, column+1, 0);
-            root.add(quantityError, column+1, 1);
+            root.add(priceField, column+1, 1);
+            root.add(errorLable, column+1, 2);
             root.add(DashBoard, 5, 13);
             //setting rest of data according to its type
             if(isMedicine)
@@ -185,24 +190,51 @@ public class MoreInfoSceneCreator implements SceneProvider {
         }
         return scene;
     }
-    void addingQuantity(int index) {
-        addedQuantityString = quantityField.getText();
+    void addingQuantity(int index,TextField quantityField,Label quantityLabel,Label errorLable) {
+        String addedQuantityString = quantityField.getText();
+        int addedQuantity ;
+
         try{
             addedQuantity = Integer.parseInt(addedQuantityString);
             mainApp.pharmacyManager.getAvailableItems().get(index).setQuantity(mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity() + addedQuantity);
-            quantityLable.setText("Quantity:\t" + mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity());
-            quantityError.setText("");
+            quantityLabel.setText("Quantity:\t" + mainApp.pharmacyManager.getAvailableItems().get(index).getQuantity());
+            errorLable.setText("");
         }
         catch(NumberFormatException e)
         {
-            quantityError.setText("Error: enter number not a text");
+            errorLable.setText("ErrorLable: enter number not a text");
         }
         catch(IllegalArgumentException e)
         {
-            quantityError.setText("Error: enter postive number not a negative number ");
+            errorLable.setText("Error: enter postive number not a negative number ");
         }
         finally {
+            quantityField.setText("0");
 
+        }
+
+    }
+    void editingPrice(int index,TextField priceField,Label priceLabel,Label errorLable)
+    {
+        String editPriceString = priceField.getText();
+        int newPrice ;
+
+        try{
+            newPrice = Integer.parseInt(editPriceString);
+            mainApp.pharmacyManager.getAvailableItems().get(index).setPrice( newPrice);
+            priceLabel.setText("Price:\t" + newPrice);
+            errorLable.setText("");
+        }
+        catch(NumberFormatException e)
+        {
+            errorLable.setText("ErrorLable: enter number not a text");
+        }
+        catch(IllegalArgumentException e)
+        {
+            errorLable.setText("Error: enter postive number not a negative number ");
+        }
+        finally {
+            priceField.setText("0");
         }
 
     }
