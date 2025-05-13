@@ -85,8 +85,7 @@ public class SearchSceneCreator implements SceneProvider{
                     throw new IllegalArgumentException("Not Found");
                 }
                 else if(!observableSearchItems.isEmpty()) {
-                    observableSearchItems.getFirst();
-
+                    mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
                 }
             });
             //searchButton.setOnAction();
