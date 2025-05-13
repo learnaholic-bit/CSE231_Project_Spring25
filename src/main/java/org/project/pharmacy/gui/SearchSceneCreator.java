@@ -204,14 +204,9 @@ public class SearchSceneCreator implements SceneProvider{
             return searchResult;
         }
     }
-    void searchValid() {
-
-    }
 }
 
-/*
 
- */
 
 
 
