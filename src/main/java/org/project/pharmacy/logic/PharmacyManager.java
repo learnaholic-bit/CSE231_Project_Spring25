@@ -293,14 +293,18 @@ public class PharmacyManager extends Person {
      *
      * @return A list of available PharmacyItems.
      */
+//    public ArrayList<PharmacyItem> getAvailableItems() {
+//        ArrayList<PharmacyItem> availableItems = new ArrayList<>();
+//        for (PharmacyItem item : pharmacyItems) {
+//            if (item.getAvailable()) {
+//                availableItems.add(item);
+//            }
+//        }
+//        return availableItems;
+//    }
     public ArrayList<PharmacyItem> getAvailableItems() {
-        ArrayList<PharmacyItem> availableItems = new ArrayList<>();
-        for (PharmacyItem item : pharmacyItems) {
-            if (item.getAvailable()) {
-                availableItems.add(item);
-            }
-        }
-        return availableItems;
+
+        return this.pharmacyItems;
     }
 
     /**
