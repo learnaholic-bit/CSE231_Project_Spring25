@@ -15,4 +15,7 @@ module org.project.pharmacy {
     exports org.project.pharmacy;
     exports org.project.pharmacy.gui;
     opens org.project.pharmacy.gui to javafx.fxml;
+
+    // Added to allow javafx.base to access PharmacyItem
+    opens org.project.pharmacy.logic to javafx.base;
 }

@@ -121,13 +121,33 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
     }
 
     @Override
-    public int compareTo(PharmacyItem item){
-        if(this.price > item.price)
-            return 1;
-        else if(this.price < item.price)
-            return -1;
-        else
+    public int compareTo(PharmacyItem other) {
+        if (this.name == null && other == null) {
             return 0;
+        }
+        else if (this.name == null && other != null) {
+            return -1; // Treat null as less than non-null
+        }
+        else if (this.name != null && other != null) {
+            return this.name.compareTo(other.getName());
+        }
+        else {
+            throw new NullPointerException("Cannot compare PharmacyItem to null");
+        }
+    }
+    public int compareTo(String other) {
+        if (this.name == null && other == null) {
+            return 0;
+        }
+        else if (this.name == null && other != null) {
+            return -1; // Treat null as less than non-null
+        }
+        else if (this.name != null && other != null) {
+            return this.name.compareTo(other);
+        }
+        else {
+            throw new NullPointerException("Cannot compare PharmacyItem to null");
+        }
     }
 
 
