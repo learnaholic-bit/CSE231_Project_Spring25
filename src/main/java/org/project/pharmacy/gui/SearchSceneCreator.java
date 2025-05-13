@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SearchSceneCreator implements SceneProvider{
-    private ArrayList<PharmacyItem> items = new ArrayList<>();
-    private ObservableList<PharmacyItem> observableItems;
+    //private ArrayList<PharmacyItem> items = new ArrayList<>();
+    private ObservableList<PharmacyItem> observableSearchItems;
     private TableView<PharmacyItem> searchResult;
     private MainApp mainApp;
     private Scene scene;
@@ -69,15 +69,15 @@ public class SearchSceneCreator implements SceneProvider{
 
 
             //Display Array List
-            observableItems = FXCollections.observableArrayList(items);
-            searchResult = TableUtils.createSearchResultTable(observableItems);
+            observableSearchItems = mainApp.pharmacyManager.searchByName("Paracetamol");
+            searchResult = TableUtils.createSearchResultTable(observableSearchItems);
 
-            //for test
-            items.addAll(
-                    mainApp.pharmacyManager.getAvailableItems()
-            );
+//            //for test
+//            observableSearchItems.addAll(
+//                    mainApp.pharmacyManager.getAvailableItems()
+//            );
 
-            observableItems.setAll(items);
+            //observableItems.setAll(items);
             // Add HBox to VBox
             vbox.getChildren().addAll(hbox, searchResult);
             vbox.setSpacing(20); // This will apply if you add more children later
