@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class MainApp extends Application {
     // Initialize logic classes
     PharmacyManager pharmacyManager = new PharmacyManager();
@@ -36,6 +38,12 @@ public class MainApp extends Application {
         primaryStage.setScene(mainScene);
         primaryStage.show();
         this.switchToLoginScene();
+
+
+        // Initialize the application
+        initialize();
+        //this.switchToScene(dashBoardSceneCreator.getScene());
+        this.switchToSearchScene();
     }
 
     public static void main(String[] args) {
@@ -77,4 +85,88 @@ public class MainApp extends Application {
         switchToScene(signUpSceneCreator.getScene());
     }
 
+
+    private void initialize() {
+        // Initialize any necessary components or data here
+        // For example, you can set up the pharmacy manager or load data
+        //pharmacyManager.initialize();
+        pharmacyManager.addItem(new Medicine(101, "Aspirin", 5.99, "Analgesic", "NSAID",
+                "Relieves mild to moderate pain and reduces inflammation",
+                true, 100, "Acetylsalicylic Acid", "325 mg", false,
+                LocalDate.of(2026, 12, 31)));
+        pharmacyManager.addItem(new Medicine(102, "Ibuprofen", 7.49, "Analgesic", "NSAID",
+                "Treats pain, inflammation, and fever",
+                true, 80, "Ibuprofen", "200 mg", false,
+                LocalDate.of(2027, 3, 15)));
+        pharmacyManager.addItem(new Medicine(103, "Paracetamol", 4.99, "Analgesic", "Non-opioid",
+                "Reduces pain and fever",
+                true, 120, "Acetaminophen", "500 mg", false,
+                LocalDate.of(2026, 10, 20)));
+        pharmacyManager.addItem(new Medicine(104, "Amoxicillin", 12.99, "Antibiotic", "Penicillin",
+                "Treats bacterial infections",
+                true, 50, "Amoxicillin", "500 mg", true,
+                LocalDate.of(2026, 8, 10)));
+        pharmacyManager.addItem(new Medicine(105, "Metformin", 15.49, "Antidiabetic", "Biguanide",
+                "Manages type 2 diabetes",
+                true, 60, "Metformin", "500 mg", true,
+                LocalDate.of(2027, 1, 25)));
+        pharmacyManager.addItem(new Medicine(106, "Lisinopril", 10.99, "Antihypertensive", "ACE Inhibitor",
+                "Treats high blood pressure and heart failure",
+                true, 70, "Lisinopril", "10 mg", true,
+                LocalDate.of(2026, 11, 30)));
+        pharmacyManager.addItem(new Medicine(107, "Atorvastatin", 18.99, "Cholesterol", "Statin",
+                "Lowers cholesterol levels",
+                true, 45, "Atorvastatin", "20 mg", true,
+                LocalDate.of(2026, 9, 5)));
+        pharmacyManager.addItem(new Medicine(108, "Omeprazole", 13.49, "Gastrointestinal", "Proton Pump Inhibitor",
+                "Treats acid reflux and ulcers",
+                true, 55, "Omeprazole", "20 mg", false,
+                LocalDate.of(2027, 2, 28)));
+        pharmacyManager.addItem(new Medicine(109, "Levothyroxine", 11.99, "Hormone", "Thyroid",
+                "Treats hypothyroidism",
+                true, 65, "Levothyroxine", "50 mcg", true,
+                LocalDate.of(2026, 7, 15)));
+        pharmacyManager.addItem(new Medicine(110, "Hydrochlorothiazide", 8.99, "Antihypertensive", "Diuretic",
+                "Treats high blood pressure and edema",
+                true, 90, "Hydrochlorothiazide", "25 mg", true,
+                LocalDate.of(2026, 12, 10)));
+        /////////////////////////////////////////////////////////////////////////////////////////
+        pharmacyManager.addItem(new HealthProduct(201, "Aspirin (Herbal Alternative)", 6.99, "Supplement", "Pain Relief",
+                "Natural pain relief supplement inspired by willow bark",
+                true, 150, true, LocalDate.of(2026, 6, 30)));
+        pharmacyManager.addItem(new HealthProduct(202, "Ibuprofen (Plant-Based)", 8.49, "Supplement", "Anti-Inflammatory",
+                "Plant-based anti-inflammatory supplement",
+                true, 100, true, LocalDate.of(2026, 9, 15)));
+        pharmacyManager.addItem(new HealthProduct(203, "Paracetamol (Herbal Substitute)", 5.99, "Supplement", "Fever Reducer",
+                "Herbal supplement for fever and mild pain relief",
+                true, 200, true, LocalDate.of(2027, 1, 10)));
+        pharmacyManager.addItem(new HealthProduct(204, "Metformin (Natural Support)", 16.99, "Supplement", "Blood Sugar Support",
+                "Natural supplement to support healthy blood sugar levels",
+                true, 80, true, LocalDate.of(2026, 11, 20)));
+        pharmacyManager.addItem(new HealthProduct(205, "Omeprazole (Digestive Aid)", 14.49, "Supplement", "Digestive Health",
+                "Natural digestive aid to support stomach acid balance",
+                true, 90, true, LocalDate.of(2026, 8, 5)));
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        pharmacyManager.addItem(new Equipment(301, "Digital Blood Pressure Monitor", 49.99, "Medical Device", "Diagnostic",
+                "Accurate blood pressure and pulse measurement",
+                true, 20, "Electronic", 24));
+        pharmacyManager.addItem(new Equipment(302, "Glucometer", 29.99, "Medical Device", "Monitoring",
+                "Measures blood glucose levels for diabetes management",
+                true, 30, "Electronic", 12));
+        pharmacyManager.addItem(new Equipment(303, "Nebulizer", 79.99, "Medical Device", "Respiratory",
+                "Delivers medication in mist form for respiratory conditions",
+                true, 15, "Electronic", 36));
+        pharmacyManager.addItem(new Equipment(304, "Thermometer (Infrared)", 39.99, "Medical Device", "Diagnostic",
+                "Non-contact temperature measurement",
+                true, 25, "Electronic", 18));
+        pharmacyManager.addItem(new Equipment(305, "Pill Counter Tray", 19.99, "Pharmacy Tool", "Dispensing",
+                "Manual tray for counting and sorting pills",
+                true, 50, "Manual", 6));
+        pharmacyManager.addItem(new Equipment(306, "Pulse Oximeter", 34.99, "Medical Device", "Monitoring",
+                "Measures oxygen saturation and heart rate",
+                true, 22, "Electronic", 24));
+        pharmacyManager.addItem(new Equipment(307, "Pharmacy Scale", 99.99, "Pharmacy Tool", "Weighing",
+                "High-precision scale for compounding medications",
+                true, 10, "Electronic", 48));
+    }
 }
