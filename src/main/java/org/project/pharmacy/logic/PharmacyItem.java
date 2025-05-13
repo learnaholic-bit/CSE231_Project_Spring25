@@ -85,7 +85,7 @@ public abstract class PharmacyItem implements Comparable<PharmacyItem>{
     public void setQuantity(int quantity)throws IllegalArgumentException{
         if(quantity < 0)
             throw new IllegalArgumentException("Negative quantities is not valid");
-        if(quantity < this.quantity)
+        else if(quantity < this.quantity)
             throw new IllegalArgumentException("Negative quantities is not valid");
         else
             this.quantity = quantity;
