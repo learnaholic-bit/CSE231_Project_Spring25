@@ -145,6 +145,16 @@ public class SearchSceneCreator implements SceneProvider{
                 }
 
             });
+            //Click on Pharmacy item -> opens more info
+            searchResult.setOnMouseClicked(e -> {
+                if (e.getClickCount() == 2) { // Double-click check
+                    PharmacyItem selectedItem = searchResult.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        //System.out.println("Double-clicked item: " + selectedItem.getName());
+                        mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(selectedItem));
+                    }
+                }
+            });
             dashboardButton.setOnAction(e -> mainApp.switchToDashBoardScene());
             //searchButton.setOnAction();
             /*
@@ -162,7 +172,7 @@ public class SearchSceneCreator implements SceneProvider{
             vbox.getChildren().addAll(dashboardButton, hbox, searchResult);
             vbox.setSpacing(20); // This will apply if you add more children later
             vbox.setPadding(new Insets(20, 10, 10, 10)); // Add padding: top=20, right=10, bottom=10, left=10
-            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH*1.5, SceneConfig.SCENE_HEIGHT*1.2);
+            scene = new Scene(vbox, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
             //set the focus to search and select it
             search.requestFocus();
             search.selectAll();
@@ -171,7 +181,7 @@ public class SearchSceneCreator implements SceneProvider{
     }
     public void showErrorPopup(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
+        alert.setTitle("Search Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

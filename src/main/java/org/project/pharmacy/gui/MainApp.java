@@ -35,7 +35,7 @@ public class MainApp extends Application {
 
         Scene mainScene = new Scene(rootLayout, 450, 300);
 
-        primaryStage.setTitle("My JavaFX GUI");
+        primaryStage.setTitle("Pharmacy System");
         primaryStage.setScene(mainScene);
         primaryStage.show();
         this.switchToLoginScene();
@@ -45,7 +45,7 @@ public class MainApp extends Application {
         initialize();
 
        //this.switchToSearchScene();
-        this.switchToScene(dashBoardSceneCreator.getScene());
+        //this.switchToScene(dashBoardSceneCreator.getScene());
         //primaryStage.setFullScreen(true);
     }
 
