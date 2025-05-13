@@ -234,6 +234,9 @@ public class DashBoardSceneCreator implements SceneProvider {
         StringBuilder orderSummary = new StringBuilder("Order Summary:\n\n");
         double totalCost = 0.0;
         boolean hasItems = false;
+//add new object order()
+
+
 
         for (int i = 0; i <  (pharmacyItems ).size(); i++) {
             String id = String.valueOf((pharmacyItems.get(i)).getItemId());
@@ -241,15 +244,20 @@ public class DashBoardSceneCreator implements SceneProvider {
             double price = (pharmacyItems.get(i)).getPrice();
             String qtyText = quantityFields[i].getText();
             int qty = qtyText.isEmpty() ? 0 : Integer.parseInt(qtyText);
-
             if (qty > 0) {
                 hasItems = true;
                 double itemCost = price * qty;
                 totalCost += itemCost;
                 orderSummary.append(String.format("ID: %s, %s: %d units at $%.2f each = $%.2f\n", id, name, qty, price, itemCost));
+                //add pharmacyItems.get(i) in order
+
+                //mainApp.pharmacyManager.getAvailableItems().get(i).getQuantity - qty
+                //mainApp.pharmacyManager.getAvailableItems().get(i).setQuantity
             }
         }
+        // add order to order array list in pharmacy manager
 
+        //todo switch dashboard
         if (!hasItems) {
             showAlert("Order Empty", "No items selected. Please enter quantities to buy.");
             return;
