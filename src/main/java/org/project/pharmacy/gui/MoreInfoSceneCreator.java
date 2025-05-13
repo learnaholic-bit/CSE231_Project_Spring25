@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import org.project.pharmacy.logic.*;
 
-import javax.swing.*;
 import java.time.LocalDate;
 
 public class MoreInfoSceneCreator implements SceneProvider {

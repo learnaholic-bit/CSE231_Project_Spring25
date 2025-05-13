@@ -36,6 +36,9 @@ public class MainApp extends Application {
         primaryStage.setScene(mainScene);
         primaryStage.show();
         this.switchToLoginScene();
+
+        // Initialize the application
+        initialize();
     }
 
     public static void main(String[] args) {
@@ -76,4 +79,10 @@ public class MainApp extends Application {
         switchToScene(signUpSceneCreator.getScene());
     }
 
+
+    private void initialize() {
+        // Initialize any necessary components or data here
+        // For example, you can set up the pharmacy manager or load data
+        //pharmacyManager.initialize();
+    }
 }
