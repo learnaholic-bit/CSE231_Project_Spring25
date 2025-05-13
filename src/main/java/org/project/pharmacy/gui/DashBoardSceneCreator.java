@@ -27,7 +27,6 @@ public class DashBoardSceneCreator implements SceneProvider {
     private TextField[] quantityFields; // To store TextFields for order processing
     @Override
     public Scene getScene() {
-
           //  Label label = new Label("Dashboard");
             // VBox root = new VBox(label);
             // Create GridPane for the table
@@ -140,7 +139,7 @@ public class DashBoardSceneCreator implements SceneProvider {
                 eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;");
                 eyeButton.setMaxWidth(Double.MAX_VALUE);
                 int index =i;
-                eyeButton.setOnAction(e ->mainApp.switchToMoreInfoScene(index));//showMoreInfo(name, info));
+                eyeButton.setOnAction(e ->{mainApp.switchToMoreInfoScene(index);});//showMoreInfo(name, info));
                 eyeButton.setOnMouseEntered(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #d0d0d0; -fx-border-radius: 50%;"));
                 eyeButton.setOnMouseExited(e -> eyeButton.setStyle("-fx-font-size: 14px; -fx-padding: 5; -fx-border-color: black; -fx-border-width: 1; -fx-background-color: #e0e0e0; -fx-border-radius: 50%;"));
                 gridPane.add(eyeButton, 5, i + 1);
@@ -168,17 +167,23 @@ public class DashBoardSceneCreator implements SceneProvider {
             finishOrderButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5 10;");
             finishOrderButton.setMaxWidth(Double.MAX_VALUE);
             finishOrderButton.setOnAction(e -> processOrder(mainApp.pharmacyManager.getAvailableItems()));
-            gridPane.add(finishOrderButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() + 1, 6, 1); // Span all 6 columns
+         //   gridPane.add(finishOrderButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() + 1, 6, 1); // Span all 6 columns
+            // Finish Order button
+            Button searchButton = new Button("Search");
+            searchButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #0000FF; -fx-text-fill: white; -fx-padding: 5 10;");
+            searchButton.setMaxWidth(Double.MAX_VALUE);
+            searchButton.setOnAction(e -> mainApp.switchToSearchScene());
+         //   gridPane.add(searchButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() +3, 6, 1); // Span all 6 columns
             // Wrap GridPane in ScrollPane for vertical scrolling
             ScrollPane scrollPane = new ScrollPane(gridPane);
             scrollPane.setFitToWidth(true); // GridPane width matches ScrollPane viewport
             scrollPane.setFitToHeight(false); // Allow vertical scrolling
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Hide horizontal scrollbar
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Hide horizontal scrollbar
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Show vertical scrollbar when needed
             scrollPane.setPannable(true); // Allow mouse dragging to scroll
 
 // Create VBox to hold ScrollPane and Finish Order button
-            VBox contentBox = new VBox(10, scrollPane, finishOrderButton);
+            VBox contentBox = new VBox(10,searchButton, scrollPane, finishOrderButton);
             contentBox.setAlignment(Pos.CENTER);
             contentBox.setPadding(new Insets(10));
 
