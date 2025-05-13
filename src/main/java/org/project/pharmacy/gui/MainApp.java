@@ -39,8 +39,10 @@ public class MainApp extends Application {
         primaryStage.show();
         this.switchToLoginScene();
 
+
         // Initialize the application
         initialize();
+        this.switchToScene(dashBoardSceneCreator.getScene());
     }
 
     public static void main(String[] args) {

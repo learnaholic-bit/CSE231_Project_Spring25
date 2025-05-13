@@ -165,7 +165,7 @@ public class DashBoardSceneCreator implements SceneProvider {
             Button finishOrderButton = new Button("Finish Order");
             finishOrderButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5 10;");
             finishOrderButton.setMaxWidth(Double.MAX_VALUE);
-            finishOrderButton.setOnAction(e -> processOrder(mainApp.pharmacyManager.getAvailableItems());
+            finishOrderButton.setOnAction(e -> processOrder(mainApp.pharmacyManager.getAvailableItems()));
             gridPane.add(finishOrderButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() + 1, 6, 1); // Span all 6 columns
 
             // Wrap GridPane in VBox for resizing
@@ -195,16 +195,16 @@ public class DashBoardSceneCreator implements SceneProvider {
     }
 
     // Method to process the order
-    private void processOrder(String[][] medicines) {
+    private void processOrder(ArrayList<PharmacyItem> pharmacyItems) {
         StringBuilder orderSummary = new StringBuilder("Order Summary:\n\n");
         double totalCost = 0.0;
         boolean hasItems = false;
 
-        for (int i = 0; i < medicines.length; i++) {
-            String id = medicines[i][0];
-            String name = medicines[i][1];
-            double price = Double.parseDouble(medicines[i][2]);
-            String qtyText = quantityFields[i].getText();
+        for (int i = 0; i <  (pharmacyItems ).size(); i++) {
+            String id = String.valueOf((pharmacyItems.get(i)).getItemId());
+            String name = (pharmacyItems.get(i)).getName();
+            double price = (pharmacyItems.get(i)).getPrice();
+            String qtyText = String.valueOf((pharmacyItems.get(i)).getQuantity());
             int qty = qtyText.isEmpty() ? 0 : Integer.parseInt(qtyText);
 
             if (qty > 0) {
