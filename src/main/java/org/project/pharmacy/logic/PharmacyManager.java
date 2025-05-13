@@ -269,20 +269,21 @@ public class PharmacyManager extends Person {
         ArrayList <PharmacyItem> sortedByName = this.sortItemsByNameArr(false);
         ObservableList<PharmacyItem> searchItems = FXCollections.observableArrayList();
         for (PharmacyItem o : sortedByName) {
-            if(o.compareTo(targetItem)<=0) {
+            /*if(o.compareTo(targetItem)<=0) {*/        //using compareTo that takes String
+            if(o.getName().compareTo(targetItem)<=0) {
                 System.out.println(o.getName().toLowerCase().contains(targetItem.toLowerCase()));
                 if(o.getName().toLowerCase().contains(targetItem.toLowerCase())) {
-                    System.out.println("entering second if");
+                    //System.out.println("entering second if");
                     searchItems.add(o);
                 }
             }
             else {
                 //FXCollections.sort(searchItems);
-                //searchItems.sorted();
+                searchItems.sorted();
                 break;
             }
         }
-        for (PharmacyItem o : searchItems) System.out.println(o.getName());;
+        //for (PharmacyItem o : searchItems) System.out.println(o.getName());
         //System.out.println(searchItems.sorted());
         return searchItems;
     }

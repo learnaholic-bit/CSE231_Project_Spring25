@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class SearchSceneCreator implements SceneProvider{
     //private ArrayList<PharmacyItem> items = new ArrayList<>();
-    private ObservableList<PharmacyItem> observableSearchItems;
+    ObservableList<PharmacyItem> observableSearchItems = FXCollections.observableArrayList();
     private TableView<PharmacyItem> searchResult;
     private MainApp mainApp;
     private Scene scene;
@@ -43,7 +43,7 @@ public class SearchSceneCreator implements SceneProvider{
             HBox hbox = new HBox();
 
             // TextField for search
-            TextField search = new TextField("Seacrh?"); // Note: Typo "Seacrh?" → should be "Search?"
+            TextField search = new TextField("Search?");
             //search.setPrefWidth(250);
             // Search Button with icon
             Button searchButton = new Button();
@@ -69,8 +69,15 @@ public class SearchSceneCreator implements SceneProvider{
 
 
             //Display Array List
-            observableSearchItems = mainApp.pharmacyManager.searchByName("Paracetamol");
             searchResult = TableUtils.createSearchResultTable(observableSearchItems);
+            search.setOnKeyTyped(e -> {
+                //System.out.println("entering");
+                observableSearchItems = mainApp.pharmacyManager.searchByName(search.getText());
+                searchResult.setItems(observableSearchItems);
+            });
+            /*
+            observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
+            searchResult = TableUtils.createSearchResultTable(observableSearchItems);  */      //for test
 
 //            //for test
 //            observableSearchItems.addAll(
@@ -90,19 +97,19 @@ public class SearchSceneCreator implements SceneProvider{
     class TableUtils {
         public static TableView<PharmacyItem> createSearchResultTable(ObservableList<PharmacyItem> items) {
             TableView<PharmacyItem> searchResult = new TableView<>(items);
-
+            /*
             TableColumn<PharmacyItem, Integer> idColumn = new TableColumn<>("ID");
             idColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
-
+            */
             TableColumn<PharmacyItem, String> nameColumn = new TableColumn<>("Name");
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             TableColumn<PharmacyItem, Double> priceColumn = new TableColumn<>("Price");
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
+            /*
             TableColumn<PharmacyItem, String> descriptionColumn = new TableColumn<>("Description");
             descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-
+            */
             TableColumn<PharmacyItem, Boolean> isAvailableColumn = new TableColumn<>("Available");
             isAvailableColumn.setCellValueFactory(cellData -> {
                 PharmacyItem item = cellData.getValue();
@@ -124,16 +131,22 @@ public class SearchSceneCreator implements SceneProvider{
                     }
                 }
             });
-
+            /*
             // Bind column widths to a percentage of TableView width
             idColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.05));        // 10% for ID
             nameColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.3));      // 30% for Name
             priceColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1));    // 15% for Price
             descriptionColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.45)); // 35% for Description
             isAvailableColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1)); // 10% for Available
+            */
+            // Bind column widths to a percentage of TableView width
+            nameColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.5));      // 30% for Name
+            priceColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.4));    // 15% for Price
+            isAvailableColumn.prefWidthProperty().bind(searchResult.widthProperty().multiply(0.1)); // 10% for Available
 
             searchResult.getColumns().clear();
-            searchResult.getColumns().addAll(idColumn, nameColumn, priceColumn, descriptionColumn, isAvailableColumn);
+            //searchResult.getColumns().addAll(idColumn, nameColumn, priceColumn, descriptionColumn, isAvailableColumn);
+            searchResult.getColumns().addAll(nameColumn, priceColumn, isAvailableColumn);
             searchResult.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
             return searchResult;
