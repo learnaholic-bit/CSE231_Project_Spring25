@@ -27,7 +27,7 @@ public class DashBoardSceneCreator implements SceneProvider {
     private TextField[] quantityFields; // To store TextFields for order processing
     @Override
     public Scene getScene() {
-        if (scene == null) {
+
           //  Label label = new Label("Dashboard");
             // VBox root = new VBox(label);
             // Create GridPane for the table
@@ -201,7 +201,7 @@ public class DashBoardSceneCreator implements SceneProvider {
             root.setPadding(new Insets(10));
             root.setAlignment(Pos.CENTER);
             scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);*/
-        }
+
         return scene;
     }
     // Method to adjust quantity using + or - buttons
