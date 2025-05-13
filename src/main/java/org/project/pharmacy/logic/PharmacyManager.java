@@ -265,14 +265,15 @@ public class PharmacyManager extends Person {
     }
 
 
-    public ObservableList<PharmacyItem> searchByName(String targetItem) {
+    public ObservableList<PharmacyItem> searchByName(String searchName) {
         ArrayList <PharmacyItem> sortedByName = this.sortItemsByNameArr(false);
         ObservableList<PharmacyItem> searchItems = FXCollections.observableArrayList();
         for (PharmacyItem o : sortedByName) {
-            /*if(o.compareTo(targetItem)<=0) {*/        //using compareTo that takes String
-            if(o.getName().compareTo(targetItem)<=0) {
-                //System.out.println(o.getName().toLowerCase().contains(targetItem.toLowerCase()));     //for debugging
-                if(o.getName().toLowerCase().contains(targetItem.toLowerCase())) {
+            //System.out.println(o.getName());
+            /*if(o.compareTo(searchName)<=0) {*/        //using compareTo that takes String
+            if(o.getName().compareTo(searchName.toLowerCase())<=0) {
+                //System.out.println(o.getName().toLowerCase().contains(searchName.toLowerCase()));     //for debugging
+                if(o.getName().toLowerCase().contains(searchName.toLowerCase())) {
                     //System.out.println("entering second if");
                     searchItems.add(o);
                 }
@@ -288,14 +289,22 @@ public class PharmacyManager extends Person {
         return searchItems;
     }
 
-    public void searchValidate(String searchName, ObservableList<PharmacyItem> searchItems) throws RuntimeException{
-        if (searchName == "") {
-            throw new IllegalArgumentException("Invalid String");
-        }
-        else if (searchItems.isEmpty()) {
-            throw new RuntimeException("No Pharmacy items found for search: " + searchName);
+    //new Exceptions
+    public class ItemNotFoundException extends RuntimeException {
+        public ItemNotFoundException(String message) {
+            super(message);
         }
     }
+
+    public void searchValidate(String searchName, ObservableList<PharmacyItem> searchItems) throws RuntimeException{
+        if (searchItems.isEmpty()&(searchName!="")) {
+            throw new ItemNotFoundException("No Pharmacy items found for search: " + searchName);
+        }
+        else if (searchName == "") {
+            throw new IllegalArgumentException("Invalid String");
+        }
+    }
+
 
 
     /**
