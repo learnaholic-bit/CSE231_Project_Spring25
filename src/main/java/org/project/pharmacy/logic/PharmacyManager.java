@@ -271,7 +271,7 @@ public class PharmacyManager extends Person {
         for (PharmacyItem o : sortedByName) {
             /*if(o.compareTo(targetItem)<=0) {*/        //using compareTo that takes String
             if(o.getName().compareTo(targetItem)<=0) {
-                System.out.println(o.getName().toLowerCase().contains(targetItem.toLowerCase()));
+                //System.out.println(o.getName().toLowerCase().contains(targetItem.toLowerCase()));     //for debugging
                 if(o.getName().toLowerCase().contains(targetItem.toLowerCase())) {
                     //System.out.println("entering second if");
                     searchItems.add(o);
@@ -286,6 +286,15 @@ public class PharmacyManager extends Person {
         //for (PharmacyItem o : searchItems) System.out.println(o.getName());
         //System.out.println(searchItems.sorted());
         return searchItems;
+    }
+
+    public void searchValidate(String searchName, ObservableList<PharmacyItem> searchItems) throws RuntimeException{
+        if (searchName == "") {
+            throw new IllegalArgumentException("Invalid String");
+        }
+        else if (searchItems.isEmpty()) {
+            throw new RuntimeException("No Pharmacy items found for search: " + searchName);
+        }
     }
 
 

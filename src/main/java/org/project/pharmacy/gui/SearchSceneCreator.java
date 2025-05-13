@@ -92,37 +92,47 @@ public class SearchSceneCreator implements SceneProvider{
                 if (search.getText() == "") searchResult.setItems(FXCollections.observableArrayList(mainApp.pharmacyManager.getAvailableItems()));
             });
             searchButton.setOnAction(e -> {
-                if (search.getText() == "") {
-                    throw new IllegalArgumentException("Invalid String");
+                try {
+                    mainApp.pharmacyManager.searchValidate(search.getText(), observableSearchItems);
+                } catch (IllegalArgumentException ex) {             //empty search
+                    showErrorPopup(ex.getMessage());
+                } catch (RuntimeException ex) {
+                    showErrorPopup(ex.getMessage());                //not found
                 }
-                if (observableSearchItems.isEmpty()) {
-                    throw new IllegalArgumentException("Not Found");
-                }
-                else if(!observableSearchItems.isEmpty()) {
-                    mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
+                finally {
+                    if(!observableSearchItems.isEmpty()) {
+                        mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
+                    }
                 }
             });
             search.setOnAction(e -> {
-                if (search.getText() == "") {
-                    throw new IllegalArgumentException("Invalid String");
+                try {
+                    mainApp.pharmacyManager.searchValidate(search.getText(), observableSearchItems);
+                } catch (IllegalArgumentException ex) {             //empty search
+                    showErrorPopup(ex.getMessage());
+                } catch (RuntimeException ex) {
+                    showErrorPopup(ex.getMessage());                //not found
                 }
-                if (observableSearchItems.isEmpty()) {
-                    throw new IllegalArgumentException("Not Found");
-                }
-                else if(!observableSearchItems.isEmpty()) {
-                    mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
+                finally {
+                    if(!observableSearchItems.isEmpty()) {
+                        mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
+                    }
                 }
             });
             filterButton.setOnAction(e -> {
-                if (search.getText() == "") {
-                    throw new IllegalArgumentException("Invalid String");
+                try {
+                    mainApp.pharmacyManager.searchValidate(search.getText(), observableSearchItems);
+                } catch (IllegalArgumentException ex) {             //empty search
+                    showErrorPopup(ex.getMessage());
+                } catch (RuntimeException ex) {
+                    showErrorPopup(ex.getMessage());                //not found
                 }
-                if (observableSearchItems.isEmpty()) {
-                    throw new IllegalArgumentException("Not Found");
+                finally {
+                    if(!observableSearchItems.isEmpty()) {
+                        FXCollections.sort(observableSearchItems);  //generic sort, uses overridden .compareTo() in pharmacyItem
+                    }
                 }
-                else if(!observableSearchItems.isEmpty()) {
-                    FXCollections.sort(observableSearchItems);
-                }
+
             });
             dashboardButton.setOnAction(e -> mainApp.switchToDashBoardScene());
             //searchButton.setOnAction();
@@ -136,15 +146,25 @@ public class SearchSceneCreator implements SceneProvider{
 //            );
 
             //observableItems.setAll(items);
+
             // Add HBox to VBox
             vbox.getChildren().addAll(dashboardButton, hbox, searchResult);
             vbox.setSpacing(20); // This will apply if you add more children later
             vbox.setPadding(new Insets(20, 10, 10, 10)); // Add padding: top=20, right=10, bottom=10, left=10
-
             scene = new Scene(vbox, SceneConfig.SCENE_WIDTH*1.5, SceneConfig.SCENE_HEIGHT*1.2);
+            //set the focus to search
+            search.requestFocus();
         }
         return scene;
     }
+    public void showErrorPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     class TableUtils {
         public static TableView<PharmacyItem> createSearchResultTable(ObservableList<PharmacyItem> items) {
             TableView<PharmacyItem> searchResult = new TableView<>(items);
