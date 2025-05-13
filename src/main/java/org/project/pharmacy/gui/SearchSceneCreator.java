@@ -99,6 +99,9 @@ public class SearchSceneCreator implements SceneProvider{
                     mainApp.switchToMoreInfoScene(mainApp.pharmacyManager.getAvailableItems().indexOf(observableSearchItems.getFirst()));
                 }
             });
+            filterButton.setOnAction(e -> {
+                FXCollections.sort(observableSearchItems);              //implements compareTo like generic sort of ArrayList
+            });
             //searchButton.setOnAction();
             /*
             observableSearchItems = mainApp.pharmacyManager.searchByName("dig");
@@ -176,6 +179,9 @@ public class SearchSceneCreator implements SceneProvider{
 
             return searchResult;
         }
+    }
+    void searchValid() {
+
     }
 }
 
