@@ -100,7 +100,15 @@ public class SearchSceneCreator implements SceneProvider{
                 }
             });
             filterButton.setOnAction(e -> {
-                FXCollections.sort(observableSearchItems);              //implements compareTo like generic sort of ArrayList
+                if (search.getText() == "") {
+                    throw new IllegalArgumentException("Invalid String");
+                }
+                if (observableSearchItems.isEmpty()) {
+                    throw new IllegalArgumentException("Not Found");
+                }
+                else if(!observableSearchItems.isEmpty()) {
+                    FXCollections.sort(observableSearchItems);
+                }
             });
             //searchButton.setOnAction();
             /*
