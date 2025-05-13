@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import org.project.pharmacy.logic.*;
 
 
@@ -15,7 +14,6 @@ public class MoreInfoSceneCreator implements SceneProvider {
 
     private MainApp mainApp;
     private Scene scene;
-    private  PharmacyItem pharmacyItemData;
     String addedQuantityString ="0";
     int addedQuantity =0;
     Label quantityLable = new Label();
@@ -25,13 +23,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
     }
     @Override
     public Scene getScene() {
-        try {
-            return getScene(pharmacyItemData);
-        }
-        catch (NullPointerException e)
-        {
-            return null;
-        }
+      return scene;
     }
 
     public Scene getScene(PharmacyItem pharmacyItem) {
@@ -204,13 +196,5 @@ public class MoreInfoSceneCreator implements SceneProvider {
             quantityField.setText("0");
         }
 
-    }
-    void setPharmacyItem(PharmacyItem pharmacyItem)
-    {
-        this.pharmacyItemData = pharmacyItem;
-    }
-    PharmacyItem getPharmacyItem ()
-    {
-        return this.pharmacyItemData;
     }
 }
