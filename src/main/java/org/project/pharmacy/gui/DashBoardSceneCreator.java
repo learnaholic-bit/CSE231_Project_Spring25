@@ -167,7 +167,9 @@ public class DashBoardSceneCreator implements SceneProvider {
             Button finishOrderButton = new Button("Finish Order");
             finishOrderButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 5 10;");
             finishOrderButton.setMaxWidth(Double.MAX_VALUE);
-            finishOrderButton.setOnAction(e -> processOrder(mainApp.pharmacyManager.getAvailableItems()));
+            finishOrderButton.setOnAction(e -> {
+                finishOrderMethod();
+            });
          //   gridPane.add(finishOrderButton, 0,  (mainApp.pharmacyManager.getAvailableItems() ).size() + 1, 6, 1); // Span all 6 columns
             // Finish Order button
             Button searchButton = new Button("Search");
@@ -250,14 +252,11 @@ public class DashBoardSceneCreator implements SceneProvider {
                 totalCost += itemCost;
                 orderSummary.append(String.format("ID: %s, %s: %d units at $%.2f each = $%.2f\n", id, name, qty, price, itemCost));
                 //add pharmacyItems.get(i) in order
-
-                //mainApp.pharmacyManager.getAvailableItems().get(i).getQuantity - qty
-                //mainApp.pharmacyManager.getAvailableItems().get(i).setQuantity
             }
         }
+        //totalCost--> totalAmount
         // add order to order array list in pharmacy manager
 
-        //todo switch dashboard
         if (!hasItems) {
             showAlert("Order Empty", "No items selected. Please enter quantities to buy.");
             return;
@@ -270,10 +269,12 @@ public class DashBoardSceneCreator implements SceneProvider {
         alert.setContentText(orderSummary.toString());
         alert.showAndWait();
 
+
         // Clear TextFields after order
         for (TextField field : quantityFields) {
             field.clear();
         }
+        mainApp.switchToDashBoardScene();
     }
 /*
     // Method to show more info in a new pane (Stage)
@@ -309,4 +310,19 @@ public class DashBoardSceneCreator implements SceneProvider {
         alert.showAndWait();
 
 
-}}
+}
+    private void finishOrderMethod () {
+        for (int i = 0; i <  (mainApp.pharmacyManager.getAvailableItems()).size(); i++) {
+            String qtyText = quantityFields[i].getText();
+            int qty = qtyText.isEmpty() ? 0 : Integer.parseInt(qtyText);
+            if (qty > 0) {
+                System.out.println("before");
+                int newqty = mainApp.pharmacyManager.getAvailableItems().get(i).getQuantity() - qty;
+                System.out.println("new quantity: "+newqty);
+                mainApp.pharmacyManager.getAvailableItems().get(i).setQuantity(newqty);
+            }
+        }
+        processOrder(mainApp.pharmacyManager.getAvailableItems());
+
+
+    }}
