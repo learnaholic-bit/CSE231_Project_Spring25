@@ -55,7 +55,7 @@ public class SignUpSceneCreator implements SceneProvider {
             });
 
             Text loginText = new Text("Have an account? ");
-            Text loginLink = new Text("Sign Up");
+            Text loginLink = new Text("Login");
             loginLink.setStyle("-fx-underline: true; -fx-fill: blue;"); // Make it look like a hyperlink
             loginLink.setOnMouseClicked(e -> mainApp.switchToLoginScene());
 
