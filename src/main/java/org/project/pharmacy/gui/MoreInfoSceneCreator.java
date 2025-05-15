@@ -82,8 +82,8 @@ public class MoreInfoSceneCreator implements SceneProvider {
             TextField quantityField = new TextField();
             TextField priceField = new TextField();
 
-            quantityField.setText("0");
-            priceField.setText("0");
+            quantityField.setPromptText("0");
+            priceField.setPromptText("0");
             //setting medicine labels
             Label activeIngrediantLable = new Label(activeIngredient);
             Label DosageLable = new Label(dosage);
@@ -208,7 +208,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             errorLable.setText("Error: enter postive number not a negative number ");
         }
         finally {
-            quantityField.setText("0");
+            quantityField.setPromptText("0");
 
         }
 
@@ -233,7 +233,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             errorLable.setText("Error: enter postive number not a negative number ");
         }
         finally {
-            priceField.setText("0");
+            priceField.setPromptText("0");
         }
 
     }

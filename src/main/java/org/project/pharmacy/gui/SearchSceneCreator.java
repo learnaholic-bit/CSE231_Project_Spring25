@@ -46,7 +46,8 @@ public class SearchSceneCreator implements SceneProvider{
             HBox hbox = new HBox();
 
             // TextField for search
-            TextField search = new TextField("Search?");
+            TextField search = new TextField();
+            search.setPromptText("Search?");
             //search.setPrefWidth(250);
             // Search Button with icon
             Button searchButton = new Button();
