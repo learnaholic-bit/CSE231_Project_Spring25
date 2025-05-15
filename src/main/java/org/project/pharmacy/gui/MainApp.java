@@ -45,7 +45,7 @@ public class MainApp extends Application {
         initialize();
 
        //this.switchToSearchScene();
-        this.switchToScene(dashBoardSceneCreator.getScene());
+        //this.switchToScene(dashBoardSceneCreator.getScene());
         //primaryStage.setFullScreen(true);
     }
 

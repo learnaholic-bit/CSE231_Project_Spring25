@@ -104,7 +104,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Button DashBoard = new Button("DashBoard");
             DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //setting adding quantity feature
-            Button addQuantity = new Button("Add Quantity");
+            Button addQuantity = new Button("Add/Remove Quantity");
             addQuantity.setOnAction(e -> {addingQuantity(index,quantityField,quantityLable,errorLable);});
             //setting edit price
             Button editPrice = new Button("Edit Price");
@@ -205,7 +205,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
         }
         catch(IllegalArgumentException e)
         {
-            errorLable.setText("Error: enter postive number not a negative number ");
+            errorLable.setText("Error: enter a valid number ");
         }
         finally {
             quantityField.setPromptText("0");
