@@ -23,7 +23,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
     }
 
     public Scene getScene(int index) {
-        if (scene == null) {
+
 
             Label label = new Label(" More Info Scene");
             GridPane root = new GridPane();
@@ -187,7 +187,6 @@ public class MoreInfoSceneCreator implements SceneProvider {
                 root.add(typeLable, column, 10);
                 root.add(warrantyPeriodLable, column, 11);
             }
-        }
         return scene;
     }
     void addingQuantity(int index,TextField quantityField,Label quantityLabel,Label errorLable) {
