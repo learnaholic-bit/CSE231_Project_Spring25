@@ -40,7 +40,7 @@ public void displayInfo ()
 
     @Override
     public boolean isAvailable(){
-        return super.isAvailable;
+        return quantity>0;
     }
     public LocalDate getExpiryDate(){return expiryDate;}
     @Override
@@ -53,7 +53,7 @@ public void sellItem () throws IllegalStateException
 {
     if(isExpired())
         throw new IllegalStateException("the medicine is expired");
-    else if(isAvailable())
+    else if(!isAvailable())
         throw new IllegalStateException("the medicine is sold out");
     else 
     quantity -=1;

@@ -30,7 +30,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             root.setHgap(10);
             root.setVgap(3.5);
             int column = 1;
-            scene = new Scene(root, 700,310);
+            scene = new Scene(root, SceneConfig.SCENE_WIDTH, SceneConfig.SCENE_HEIGHT);
 
             boolean isMedicine=false,isReferenceItem=false,isEquipment=false,isHealthProduct=false;
 
