@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.project.pharmacy.logic.Order;
 import org.project.pharmacy.logic.PharmacyItem;
 
 import java.util.ArrayList;
@@ -236,7 +237,6 @@ public class DashBoardSceneCreator implements SceneProvider {
         StringBuilder orderSummary = new StringBuilder("Order Summary:\n\n");
         double totalCost = 0.0;
         boolean hasItems = false;
-//add new object order()
 
 
 
@@ -251,11 +251,9 @@ public class DashBoardSceneCreator implements SceneProvider {
                 double itemCost = price * qty;
                 totalCost += itemCost;
                 orderSummary.append(String.format("ID: %s, %s: %d units at $%.2f each = $%.2f\n", id, name, qty, price, itemCost));
-                //add pharmacyItems.get(i) in order
+
             }
         }
-        //totalCost--> totalAmount
-        // add order to order array list in pharmacy manager
 
         if (!hasItems) {
             showAlert("Order Empty", "No items selected. Please enter quantities to buy.");
