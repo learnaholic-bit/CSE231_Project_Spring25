@@ -25,7 +25,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
     public Scene getScene(int index) {
 
 
-            Label label = new Label(" More Info Scene");
+
             GridPane root = new GridPane();
             root.setHgap(10);
             root.setVgap(3.5);
