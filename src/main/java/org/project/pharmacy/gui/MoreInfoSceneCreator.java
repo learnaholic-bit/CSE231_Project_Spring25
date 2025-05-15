@@ -101,7 +101,7 @@ public class MoreInfoSceneCreator implements SceneProvider {
             Label typeLable = new Label(type);
             Label warrantyPeriodLable = new Label(warrantyPeriod);
 
-            Button DashBoard = new Button("Dash Board");
+            Button DashBoard = new Button("DashBoard");
             DashBoard.setOnAction(e -> {mainApp.switchToDashBoardScene();});
             //setting adding quantity feature
             Button addQuantity = new Button("Add Quantity");
@@ -216,10 +216,10 @@ public class MoreInfoSceneCreator implements SceneProvider {
     void editingPrice(int index,TextField priceField,Label priceLabel,Label errorLable)
     {
         String editPriceString = priceField.getText();
-        int newPrice ;
+        Double newPrice ;
 
         try{
-            newPrice = Integer.parseInt(editPriceString);
+            newPrice = Double.parseDouble(editPriceString);
             mainApp.pharmacyManager.getAvailableItems().get(index).setPrice( newPrice);
             priceLabel.setText("Price:\t" + newPrice);
             errorLable.setText("");
